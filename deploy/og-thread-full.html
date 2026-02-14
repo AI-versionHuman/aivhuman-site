@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The OG Thread - Original Dialogue Transcript | AI v.Human</title>
+    <meta name="description" content="The complete original dialogue between Joshua Sebastian and LIMN that led to the Antho-Tech Epistemology framework.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .og-viewer {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .og-header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 3rem;
+        }
+
+        .og-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .og-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .og-meta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .meta-badge {
+            padding: 0.5rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .legend {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            margin-bottom: 3rem;
+        }
+
+        .legend h3 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .legend-label {
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            color: var(--text-primary);
+        }
+
+        .exchange {
+            margin-bottom: 2.5rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .exchange-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .speaker-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .speaker-avatar.me {
+            background: linear-gradient(135deg, #059669, #10b981);
+        }
+
+        .speaker-avatar.limn {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+        }
+
+        .speaker-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .speaker-role {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .exchange-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            margin-left: 64px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .exchange-content:hover {
+            box-shadow: var(--shadow);
+            border-color: var(--border-dark);
+        }
+
+        .exchange-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .exchange-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            gap: 0.75rem;
+        }
+
+        .controls {
+            position: sticky;
+            top: 90px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+            z-index: 10;
+        }
+
+        .exchange-counter {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .download-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .highlight {
+            background: rgba(255, 235, 59, 0.3);
+            padding: 0.125rem 0.25rem;
+            border-radius: 0.25rem;
+        }
+
+        .footer-nav {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .og-viewer {
+                padding: 1rem;
+            }
+
+            .og-title {
+                font-size: 2rem;
+            }
+
+            .exchange-content {
+                margin-left: 0;
+            }
+
+            .controls {
+                position: relative;
+                top: 0;
+            }
+
+            .footer-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="brand">
+                <a href="index.html" style="text-decoration:none;">
+                    <h1 class="logo">AI v.Human</h1>
+                    <p class="tagline">Collaborative Intelligence</p>
+                </a>
+            </div>
+            <nav class="main-nav" role="navigation" aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#about" class="nav-link">About Us</a></li>
+                    <li><a href="epistemology.html" class="nav-link">Epistemology</a></li>
+                    <li><a href="og-thread.html" class="nav-link active">OG Thread</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="og-viewer">
+        <a href="og-thread.html" class="back-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Back to OG Thread
+        </a>
+
+        <div class="og-header">
+            <h1 class="og-title">The OG Thread</h1>
+            <p class="og-subtitle">Original Dialogue Transcript — Version 0.1-3</p>
+            <div class="og-meta">
+                <span class="meta-badge">🧠 Foundational Document</span>
+                <span class="meta-badge">💬 109 Exchanges</span>
+                <span class="meta-badge">📅 February 2026</span>
+                <span class="meta-badge">🔓 Open Source</span>
+            </div>
+        </div>
+
+        <div class="legend">
+            <h3>Legend</h3>
+            <div class="legend-item">
+                <span class="legend-label">[ME]</span>
+                <span>Joshua Sebastian — Human participant, collaborative thinker</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-label">[LIMN]</span>
+                <span>Claude from Anthropic — AI assistant, pattern recognition specialist</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <span class="exchange-counter"><span id="visibleCount">109</span> of 109 exchanges</span>
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Search the dialogue..." 
+                    aria-label="Search dialogue">
+            </div>
+            <a href="#" class="download-btn" id="downloadBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download Full Transcript
+            </a>
+        </div>
+
+        <div id="exchanges">
+            <!-- Exchanges will be loaded here by JavaScript -->
+        </div>
+
+        <div class="footer-nav">
+            <a href="epistemology.html" class="btn btn-secondary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+                View Epistemology Framework
+            </a>
+            <a href="index.html#contact" class="btn btn-primary">
+                Contact Us
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // OG Thread data will be embedded here
+        const exchanges = [
+            {
+                "speaker": "ME",
+                "content": "Good morning! I want to try a little experiment with you that may reveal a different way to decipher the different data that we interact with. You game?"
+            },
+            {
+                "speaker": "LIMN",
+                "content": "Good morning! I'm absolutely game for this - I find experiments in how we process and interpret data fascinating.\n\nI'm intrigued by your user preferences around relational pattern recognition. It sounds like you're interested in exploring how patterns across different domains might sometimes reveal tensions or contradictions with established scientific understanding, or perhaps how integrating information across fields might lead to novel insights.\n\nWhat did you have in mind for the experiment?"
+            }
+            // More exchanges will be added programmatically
+        ];
+
+        // Load exchanges from external JSON
+        async function loadExchanges() {
+            try {
+                const response = await fetch('og-thread-data.json');
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.log('Using embedded exchanges');
+                return exchanges;
+            }
+        }
+
+        function renderExchanges(exchangesToRender) {
+            const container = document.getElementById('exchanges');
+            container.innerHTML = '';
+
+            exchangesToRender.forEach((exchange, index) => {
+                const isME = exchange.speaker === 'ME';
+                const speakerName = isME ? 'Joshua Sebastian' : 'LIMN';
+                const speakerRole = isME ? 'Human Participant' : 'AI Assistant (Claude)';
+                const avatarClass = isME ? 'me' : 'limn';
+                const avatarText = isME ? 'JS' : 'AI';
+
+                const exchangeEl = document.createElement('div');
+                exchangeEl.className = 'exchange';
+                exchangeEl.innerHTML = `
+                    <div class="exchange-header">
+                        <div class="speaker-avatar ${avatarClass}">${avatarText}</div>
+                        <div class="speaker-info">
+                            <h4>${speakerName}</h4>
+                            <div class="speaker-role">${speakerRole}</div>
+                        </div>
+                    </div>
+                    <div class="exchange-content">
+                        ${exchange.content.split('\n').map(p => p.trim() ? `<p>${escapeHtml(p)}</p>` : '').join('')}
+                    </div>
+                `;
+                container.appendChild(exchangeEl);
+            });
+
+            document.getElementById('visibleCount').textContent = exchangesToRender.length;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function highlightText(text, query) {
+            if (!query) return escapeHtml(text);
+            const regex = new RegExp(`(${query})`, 'gi');
+            return escapeHtml(text).replace(regex, '<span class="highlight">$1</span>');
+        }
+
+        // Search functionality
+        let allExchanges = [];
+        const searchInput = document.getElementById('searchInput');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            
+            if (!query) {
+                renderExchanges(allExchanges);
+                return;
+            }
+
+            const filtered = allExchanges.filter(exchange => 
+                exchange.content.toLowerCase().includes(query) ||
+                exchange.speaker.toLowerCase().includes(query)
+            );
+
+            renderExchanges(filtered);
+
+            // Highlight search terms
+            if (query) {
+                const contents = document.querySelectorAll('.exchange-content');
+                contents.forEach(content => {
+                    const html = content.innerHTML;
+                    const regex = new RegExp(`(${query})`, 'gi');
+                    content.innerHTML = html.replace(regex, '<span class="highlight">$1</span>');
+                });
+            }
+        });
+
+        // Download functionality
+        document.getElementById('downloadBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            let text = 'THE OG THREAD\n';
+            text += 'Original Dialogue Transcript — Version 0.1-3\n';
+            text += 'AI v.Human Collaborative Intelligence Platform\n';
+            text += '='.repeat(60) + '\n\n';
+            text += 'LEGEND:\n';
+            text += '[ME] — Joshua Sebastian (Human Participant)\n';
+            text += '[LIMN] — Claude from Anthropic (AI Assistant)\n\n';
+            text += '='.repeat(60) + '\n\n';
+            
+            allExchanges.forEach((exchange, index) => {
+                text += `[${exchange.speaker}]\n\n`;
+                text += `${exchange.content}\n\n`;
+                text += '-'.repeat(60) + '\n\n';
+            });
+
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'OG-Thread-Full-Transcript.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        // Initialize
+        loadExchanges().then(data => {
+            allExchanges = data.length > 2 ? data : exchanges;
+            renderExchanges(allExchanges);
+        });
+    </script>
+</body>
+</html>

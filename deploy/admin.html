@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - AI v.Human</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Admin Login Screen -->
+    <div class="admin-login" id="adminLogin">
+        <div class="login-container">
+            <div class="login-box">
+                <h1 class="logo">AI v.Human</h1>
+                <h2>Admin Panel</h2>
+                <p>Secure Access for Content Management</p>
+                
+                <form id="adminLoginForm">
+                    <div class="form-group">
+                        <label for="adminUsername">Username</label>
+                        <input type="text" id="adminUsername" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="adminPassword">Password</label>
+                        <input type="password" id="adminPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Access Admin Panel</button>
+                </form>
+                
+                <p class="login-footer">For authorized access only</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div class="admin-dashboard hidden" id="adminDashboard">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <h2 class="logo">AI v.Human</h2>
+                <p class="tagline">Admin Panel</p>
+            </div>
+            
+            <nav class="admin-nav">
+                <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    Dashboard
+                </a>
+                <a href="#main-thread" class="nav-item" data-section="main-thread">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    Main Thread
+                </a>
+                <a href="#moderation" class="nav-item" data-section="moderation">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    Moderation
+                </a>
+                <a href="#users" class="nav-item" data-section="users">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    Users
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="admin-user-info">
+                    <div class="admin-avatar">JS</div>
+                    <div>
+                        <div class="admin-name">Joshua Sebastian</div>
+                        <div class="admin-role">Administrator</div>
+                    </div>
+                </div>
+                <button class="btn btn-secondary btn-block" id="adminLogoutBtn">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Dashboard Section -->
+            <section class="admin-section active" id="dashboardSection">
+                <div class="section-header">
+                    <h2>Dashboard</h2>
+                    <div class="header-actions">
+                        <a href="index.html" class="btn btn-secondary" target="_blank">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                            View Site
+                        </a>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, var(--primary), var(--accent));">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Main Thread Posts</div>
+                            <div class="stat-value" id="statMainPosts">0</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, var(--secondary), #06b6d4);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Community Threads</div>
+                            <div class="stat-value" id="statCommunityThreads">0</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, var(--success), #059669);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Registered Users</div>
+                            <div class="stat-value" id="statUsers">0</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, var(--warning), #d97706);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Total Activity</div>
+                            <div class="stat-value" id="statActivity">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-list" id="activityList">
+                        <div class="empty-state">No recent activity</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Thread Section -->
+            <section class="admin-section" id="mainThreadSection">
+                <div class="section-header">
+                    <h2>Main Thread Management</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" id="addPostBtn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            Add Post
+                        </button>
+                    </div>
+                </div>
+
+                <div class="posts-list" id="adminPostsList"></div>
+
+                <!-- Add/Edit Post Form -->
+                <div class="post-editor hidden" id="postEditor">
+                    <h3 id="editorTitle">Add New Post</h3>
+                    <form id="postEditorForm">
+                        <input type="hidden" id="editPostId">
+                        <div class="form-group">
+                            <label for="postTitle">Post Title</label>
+                            <input type="text" id="postTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="postContent">Content</label>
+                            <textarea id="postContent" rows="8" required></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Save Post</button>
+                            <button type="button" class="btn btn-secondary" id="cancelEditBtn">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Moderation Section -->
+            <section class="admin-section" id="moderationSection">
+                <div class="section-header">
+                    <h2>Content Moderation</h2>
+                </div>
+
+                <div class="moderation-content">
+                    <div class="community-threads-list" id="moderationThreadsList"></div>
+                </div>
+            </section>
+
+            <!-- Users Section -->
+            <section class="admin-section" id="usersSection">
+                <div class="section-header">
+                    <h2>User Management</h2>
+                </div>
+
+                <div class="users-list" id="usersList">
+                    <div class="empty-state">No registered users yet</div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

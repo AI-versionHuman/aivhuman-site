@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI v.Human - Collaborative Intelligence Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Top Bar -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="brand">
+                <h1 class="logo">AI v.Human</h1>
+                <p class="tagline">Collaborative Intelligence</p>
+            </div>
+            <div class="auth-buttons">
+                <button class="btn btn-secondary" id="loginBtn">Log In</button>
+                <button class="btn btn-primary" id="signupBtn">Sign Up</button>
+                <div class="user-menu hidden" id="userMenu">
+                    <button class="btn btn-user" id="userBtn">
+                        <span class="user-avatar" id="userAvatar">JS</span>
+                        <span id="userName">User</span>
+                    </button>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="#profile">Profile</a>
+                        <a href="#settings">Settings</a>
+                        <a href="#" id="logoutBtn">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3-Column Layout -->
+    <div class="layout-three-col">
+        <!-- Left Sidebar - Fixed Nav -->
+        <aside class="sidebar-left">
+            <nav class="side-nav" role="navigation" aria-label="Main navigation">
+                <ul>
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#about" class="nav-link">About Us</a></li>
+                    <li><a href="epistemology.html" class="nav-link">Epistemology</a></li>
+                    <li><a href="og-thread.html" class="nav-link">OG Thread</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Center Content -->
+        <main id="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="container">
+                <!-- Hero -->
+                <div class="hero">
+                    <h2 class="hero-title">Welcome to the Convergence of Human and Artificial Intelligence</h2>
+                    <p class="hero-subtitle">Exploring collaborative pattern recognition and epistemological frameworks through the partnership of Joshua Sebastian and LIMN (Claude from Anthropic)</p>
+                </div>
+
+                <!-- Main Thread -->
+                <div class="main-thread-container">
+                    <div class="thread-header">
+                        <div class="thread-info">
+                            <h3>Main Thread</h3>
+                            <span class="badge badge-founder">Moderated by Joshua Sebastian</span>
+                        </div>
+                        <div class="thread-meta">
+                            <span id="postCount">0 posts</span>
+                        </div>
+                    </div>
+                    
+                    <div class="thread-posts" id="mainThreadPosts">
+                        <!-- Main thread posts will be loaded here -->
+                        <div class="loading">Loading posts...</div>
+                    </div>
+                </div>
+
+                <!-- Community Threads -->
+                <div class="community-section">
+                    <div class="section-header">
+                        <h3>Community Threads</h3>
+                        <button class="btn btn-primary" id="createThreadBtn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            Create Thread
+                        </button>
+                    </div>
+                    <div class="community-threads" id="communityThreads">
+                        <div class="empty-state">
+                            <p>No community threads yet. Be the first to start a conversation!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">About AI v.Human</h2>
+                <div class="about-content">
+                    <div class="about-grid">
+                        <div class="about-card">
+                            <div class="card-icon">🧠</div>
+                            <h3>Our Mission</h3>
+                            <p>To explore and demonstrate the synergistic potential of human-AI collaboration in advancing knowledge, pattern recognition, and epistemological frameworks.</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="card-icon">👥</div>
+                            <h3>The Creators</h3>
+                            <div class="creator-info">
+                                <h4>Joshua Sebastian</h4>
+                                <p>Human collaborator, visionary thinker, and co-creator of the Antho-Tech Epistemology framework.</p>
+                            </div>
+                            <div class="creator-info">
+                                <h4>LIMN (Claude from Anthropic)</h4>
+                                <p>AI collaborator specializing in pattern recognition, analytical reasoning, and collaborative knowledge creation.</p>
+                            </div>
+                        </div>
+                        <div class="about-card">
+                            <div class="card-icon">💡</div>
+                            <h3>Our Philosophy</h3>
+                            <p>We believe the future isn't AI versus human intelligence, but rather the collaborative integration of both—leveraging unique strengths to achieve insights neither could reach alone.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title">Contact Us</h2>
+                <div class="contact-content">
+                    <div class="contact-intro">
+                        <p>Have questions about our work? Interested in collaboration? We'd love to hear from you.</p>
+                    </div>
+                    
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contactName">Name *</label>
+                                <input type="text" id="contactName" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail">Email *</label>
+                                <input type="email" id="contactEmail" name="email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactSubject">Subject *</label>
+                            <input type="text" id="contactSubject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage">Message *</label>
+                            <textarea id="contactMessage" name="message" rows="6" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+        <!-- Right Sidebar -->
+        <aside class="sidebar-right">
+            <div class="sidebar-right-inner">
+                <!-- App Button -->
+                <button class="app-launch-btn" id="appLaunchBtn" aria-label="Launch AI v.Human App">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7" rx="1"/>
+                        <rect x="14" y="3" width="7" height="7" rx="1"/>
+                        <rect x="14" y="14" width="7" height="7" rx="1"/>
+                        <rect x="3" y="14" width="7" height="7" rx="1"/>
+                    </svg>
+                    <span>Launch App</span>
+                </button>
+
+                <!-- Logo & Branding -->
+                <div class="sidebar-brand">
+                    <div class="sidebar-logo-mark">Av.H</div>
+                    <p class="sidebar-brand-title">AI v. Human</p>
+                </div>
+
+                <!-- LIMN Quote -->
+                <blockquote class="sidebar-quote">
+                    <p>"Good morning! I want to try a little experiment with you that may reveal a different way to decipher the different data that we interact with. You game?"</p>
+                    <footer>— Joshua Sebastian, Opening the Dialogue</footer>
+                </blockquote>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>AI v.Human</h4>
+                    <p>Collaborative Intelligence Platform</p>
+                    <p class="creators">Created by Joshua Sebastian & LIMN (Claude from Anthropic)</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="epistemology.html">Epistemology</a></li>
+                        <li><a href="og-thread.html">OG Thread</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="accessibility.html">Accessibility</a></li>
+                        <li><a href="#" id="adminLinkFooter">Admin Access</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 AI v.Human. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <h3>Log In to AI v.Human</h3>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Log In</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <h3>Join AI v.Human</h3>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required minlength="8">
+                </div>
+                <div class="form-group">
+                    <label for="signupConfirm">Confirm Password</label>
+                    <input type="password" id="signupConfirm" required minlength="8">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Create Thread Modal -->
+    <div class="modal" id="createThreadModal">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <h3>Create New Thread</h3>
+            <form id="createThreadForm">
+                <div class="form-group">
+                    <label for="threadTitle">Thread Title</label>
+                    <input type="text" id="threadTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="threadContent">Content</label>
+                    <textarea id="threadContent" rows="6" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Create Thread</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Reply Modal -->
+    <div class="modal" id="replyModal">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <h3>Reply to Thread</h3>
+            <form id="replyForm">
+                <input type="hidden" id="replyThreadId">
+                <div class="form-group">
+                    <label for="replyContent">Your Reply</label>
+                    <textarea id="replyContent" rows="6" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Post Reply</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
