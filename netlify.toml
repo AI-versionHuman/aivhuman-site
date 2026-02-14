@@ -1,6 +1,7 @@
 [build]
   command = "echo 'Static site - no build needed'"
   publish = "deploy"
+  ignore = "exit 0"
 
 [[redirects]]
   from = "/admin/*"
@@ -13,13 +14,3 @@
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-
-[[headers]]
-  for = "/fonts/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/_next/static/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
