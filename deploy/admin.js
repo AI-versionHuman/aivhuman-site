@@ -21,12 +21,16 @@ function checkAdminAuth() {
 
 function showLogin() {
     document.getElementById('adminLogin').style.display = 'flex';
-    document.getElementById('adminDashboard').classList.remove('active');
+    var dashboard = document.getElementById('adminDashboard');
+    dashboard.classList.remove('active');
+    dashboard.classList.add('hidden');
 }
 
 function showDashboard() {
     document.getElementById('adminLogin').style.display = 'none';
-    document.getElementById('adminDashboard').classList.add('active');
+    var dashboard = document.getElementById('adminDashboard');
+    dashboard.classList.remove('hidden');
+    dashboard.classList.add('active');
 }
 
 function handleAdminLogin(e) {
