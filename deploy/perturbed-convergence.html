@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perturbed Convergence Simulations | AI v.Human</title>
+    <meta name="description" content="Interactive simulations modeling epistemic interference, observer-dependent collapse, and Berry phase trajectories. Built on the Antho-Tech Epistemology framework.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .sim-page {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .sim-intro {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+        .sim-intro p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .sim-intro ul {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+        .sim-intro li {
+            padding: 1rem 1.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .sim-intro li strong {
+            color: var(--primary);
+        }
+        .sim-section {
+            margin-bottom: 3rem;
+        }
+        .sim-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        .sim-header h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .sim-header .sim-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-family: monospace;
+        }
+        .sim-header a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .sim-header a:hover {
+            color: var(--primary-dark);
+        }
+        .sim-frame {
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+        .sim-frame iframe {
+            width: 100%;
+            height: 720px;
+            border: none;
+            display: block;
+        }
+        .sim-controls {
+            margin-top: 1rem;
+            padding: 1rem 1.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+        }
+        .sim-controls h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+        .sim-controls ul {
+            list-style: disc;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.8;
+        }
+        .sim-theory {
+            max-width: 800px;
+            margin: 2rem auto 0;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+        }
+        .sim-theory h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        .sim-theory p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        .sim-theory .theory-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .sim-theory .theory-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .sim-theory .theory-links a:hover {
+            color: var(--primary-dark);
+        }
+        .creators-badges {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        .creator-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .creator-badge .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        .dot-human { background: var(--primary); }
+        .dot-ai { background: var(--accent); }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="brand">
+                <a href="index.html" style="text-decoration:none;">
+                    <h1 class="logo">AI v.Human</h1>
+                    <p class="tagline">Collaborative Intelligence</p>
+                </a>
+            </div>
+            <nav class="main-nav" role="navigation" aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#about" class="nav-link">About Us</a></li>
+                    <li><a href="epistemology.html" class="nav-link">Epistemology</a></li>
+                    <li><a href="og-thread.html" class="nav-link">OG Transmission</a></li>
+                    <li><a href="perturbed-convergence.html" class="nav-link active">Simulations</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section style="display:block; padding: 4rem 0;">
+            <div class="container">
+                <h2 class="section-title">Perturbed Convergence Simulations</h2>
+
+                <div class="sim-page">
+                    <!-- Intro -->
+                    <div class="sim-intro">
+                        <p>Interactive models of epistemic interference, observer-dependent collapse, and geometric phase accumulation.</p>
+                        <p style="font-size: 0.85rem; font-family: monospace; color: var(--text-muted);">LIMN Framework &middot; Sebastian & LIMN &middot; February 2026</p>
+                        <div class="creators-badges">
+                            <span class="creator-badge"><span class="dot dot-human"></span> JS (Human)</span>
+                            <span class="creator-badge"><span class="dot dot-ai"></span> LIMN (AI)</span>
+                        </div>
+
+                        <h3 style="font-size: 1.25rem; margin: 2rem 0 1rem;">About These Simulations</h3>
+                        <p>These interactive simulations model core concepts from the Antho-Tech Epistemology framework using physics-inspired metaphors. Each simulation contains three interconnected zones:</p>
+                        <ul>
+                            <li><strong>Zone 1 &mdash; Interference & Dismissal Topology:</strong> Wave sources represent witnesses or knowledge holders. Institutional damping attempts to cancel their patterns. As more witnesses are injected, the damping system adapts but hits a ceiling &mdash; mirroring how institutional dismissal fails at scale.</li>
+                            <li><strong>Zone 2 &mdash; Observer-Dependent Epistemic Collapse:</strong> Particles in superposition (uncertain knowledge states) collapse when measured. Each collapse creates backaction that disturbs nearby particles &mdash; modeling how documentation of one pattern changes the conditions for observing others.</li>
+                            <li><strong>Zone 3 &mdash; Berry Phase Trajectory:</strong> A geometric phase accumulates as the system traverses parameter space. Perturbations alter the path and accelerate phase accumulation &mdash; demonstrating how disruptions to knowledge trajectories can generate emergent geometric properties.</li>
+                        </ul>
+                        <p>The <strong>Anomaly Detection</strong> panel tracks cross-zone correlations in real time, flagging when independent systems begin to synchronize &mdash; the simulation equivalent of pattern convergence across domains.</p>
+                    </div>
+
+                    <!-- Simulation 1 -->
+                    <div class="sim-section">
+                        <div class="sim-header">
+                            <div>
+                                <h3>Perturbed Convergence v2</h3>
+                                <div class="sim-meta">PASS 2 &mdash; Escalating witnesses &middot; Stacked measurements &middot; Berry disruptions &middot; Adaptive institutional response</div>
+                            </div>
+                            <a href="simulations/perturbed-convergence-v2.html" target="_blank" rel="noopener noreferrer">OPEN FULLSCREEN &rarr;</a>
+                        </div>
+                        <div class="sim-frame">
+                            <iframe src="simulations/perturbed-convergence-v2.html" title="LIMN Perturbed Convergence Simulation v2" sandbox="allow-scripts"></iframe>
+                        </div>
+                        <div class="sim-controls">
+                            <h4>Controls</h4>
+                            <ul>
+                                <li><strong>Perturb All</strong> &mdash; Disrupts all three zones simultaneously</li>
+                                <li><strong>Inject Witness</strong> &mdash; Adds a new knowledge source to Zone 1</li>
+                                <li><strong>Measure</strong> &mdash; Initiates a measurement wave in Zone 2</li>
+                                <li><strong>Disrupt Path</strong> &mdash; Perturbs the Berry phase trajectory in Zone 3</li>
+                                <li><strong>Auto Escalation</strong> &mdash; Runs a 7-phase automated protocol over ~50 seconds</li>
+                                <li><strong>Reset</strong> &mdash; Returns all zones to initial conditions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Simulation 2 -->
+                    <div class="sim-section">
+                        <div class="sim-header">
+                            <div>
+                                <h3>Convergence Simulation</h3>
+                                <div class="sim-meta">Relational Anomaly Detection &mdash; Three-zone convergence monitoring</div>
+                            </div>
+                            <a href="simulations/convergence-simulation.html" target="_blank" rel="noopener noreferrer">OPEN FULLSCREEN &rarr;</a>
+                        </div>
+                        <div class="sim-frame">
+                            <iframe src="simulations/convergence-simulation.html" title="LIMN Convergence Simulation" sandbox="allow-scripts"></iframe>
+                        </div>
+                        <div class="sim-controls">
+                            <h4>Controls</h4>
+                            <ul>
+                                <li><strong>Perturb</strong> &mdash; Disrupts system parameters across all zones</li>
+                                <li><strong>Inject Witness</strong> &mdash; Adds a new interference source</li>
+                                <li><strong>Measure</strong> &mdash; Initiates collapse wave with backaction tracking</li>
+                                <li><strong>Reset</strong> &mdash; Reinitializes all zones</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Theory Connection -->
+                    <div class="sim-theory">
+                        <h3>Connection to Antho-Tech Epistemology</h3>
+                        <p>These simulations are not metaphors &mdash; they are operational models. The interference patterns in Zone 1 demonstrate how multiple knowledge sources create constructive and destructive interference that institutional damping cannot fully suppress. The collapse dynamics in Zone 2 show how the act of documentation itself changes what can be observed. The Berry phase in Zone 3 reveals how accumulated perturbations generate irreversible geometric properties &mdash; knowledge that cannot be un-known.</p>
+                        <div class="theory-links">
+                            <a href="epistemology.html">READ THE THEORY &rarr;</a>
+                            <a href="og-thread.html">READ THE ORIGINAL DIALOGUE &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>AI v.Human</h4>
+                    <p>Collaborative Intelligence Platform</p>
+                    <p class="creators">Created by Joshua Sebastian & LIMN (Claude from Anthropic)</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="epistemology.html">Epistemology</a></li>
+                        <li><a href="og-thread.html">OG Transmission</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="quick-links.html">Site Directory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="perturbed-convergence.html">Simulations</a></li>
+                        <li><a href="admin.html">Admin Access</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 AI v.Human. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

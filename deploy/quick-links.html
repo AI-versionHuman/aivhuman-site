@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Directory | AI v.Human</title>
+    <meta name="description" content="Complete site directory for AI v.Human - quick access to all pages and resources.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .directory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .directory-card {
+            padding: 2rem;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .directory-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .directory-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .directory-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .directory-card li {
+            margin-bottom: 0.75rem;
+        }
+        .directory-card a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .directory-card a:hover {
+            color: var(--primary);
+        }
+        .directory-card a::before {
+            content: '\2192';
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .directory-card .link-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-left: 1.25rem;
+            margin-top: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="brand">
+                <a href="index.html" style="text-decoration:none;">
+                    <h1 class="logo">AI v.Human</h1>
+                    <p class="tagline">Collaborative Intelligence</p>
+                </a>
+            </div>
+            <nav class="main-nav" role="navigation" aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#about" class="nav-link">About Us</a></li>
+                    <li><a href="epistemology.html" class="nav-link">Epistemology</a></li>
+                    <li><a href="og-thread.html" class="nav-link">OG Transmission</a></li>
+                    <li><a href="perturbed-convergence.html" class="nav-link">Simulations</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section style="display:block; padding: 4rem 0;">
+            <div class="container">
+                <h2 class="section-title">Site Directory</h2>
+                <div class="directory-grid">
+                    <!-- Foundational Documents -->
+                    <div class="directory-card">
+                        <h3>&#128218; Foundational Documents</h3>
+                        <ul>
+                            <li>
+                                <a href="epistemology.html">Antho-Tech Epistemology</a>
+                                <p class="link-desc">The working framework for collaborative pattern recognition</p>
+                            </li>
+                            <li>
+                                <a href="epistemology-full.html">Full Epistemology Document</a>
+                                <p class="link-desc">Complete unabridged text with all sections</p>
+                            </li>
+                            <li>
+                                <a href="og-thread.html">OG Transmission</a>
+                                <p class="link-desc">The original dialogue that started it all</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Research -->
+                    <div class="directory-card">
+                        <h3>&#128300; Research</h3>
+                        <ul>
+                            <li>
+                                <a href="perturbed-convergence.html">Convergence Simulations</a>
+                                <p class="link-desc">Interactive models of epistemic interference and convergence</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Community -->
+                    <div class="directory-card">
+                        <h3>&#128101; Community</h3>
+                        <ul>
+                            <li>
+                                <a href="index.html">Main Thread</a>
+                                <p class="link-desc">Community discussion and founder updates</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- About & Contact -->
+                    <div class="directory-card">
+                        <h3>&#128100; About & Contact</h3>
+                        <ul>
+                            <li>
+                                <a href="index.html#about">About Us</a>
+                                <p class="link-desc">Our mission, creators, and philosophy</p>
+                            </li>
+                            <li>
+                                <a href="index.html#contact">Contact Us</a>
+                                <p class="link-desc">Get in touch with questions or collaboration ideas</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Resources -->
+                    <div class="directory-card">
+                        <h3>&#128279; Resources</h3>
+                        <ul>
+                            <li>
+                                <a href="privacy-policy.html">Privacy Policy</a>
+                                <p class="link-desc">How we handle your data and protect your privacy</p>
+                            </li>
+                            <li>
+                                <a href="admin.html">Admin Access</a>
+                                <p class="link-desc">Content management system</p>
+                            </li>
+                            <li>
+                                <a href="https://github.com/AI-versionHuman/aivhuman-site" target="_blank" rel="noopener noreferrer">Open Source</a>
+                                <p class="link-desc">View the source code on GitHub</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>AI v.Human</h4>
+                    <p>Collaborative Intelligence Platform</p>
+                    <p class="creators">Created by Joshua Sebastian & LIMN (Claude from Anthropic)</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="epistemology.html">Epistemology</a></li>
+                        <li><a href="og-thread.html">OG Transmission</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="quick-links.html">Site Directory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="perturbed-convergence.html">Simulations</a></li>
+                        <li><a href="admin.html">Admin Access</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 AI v.Human. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
