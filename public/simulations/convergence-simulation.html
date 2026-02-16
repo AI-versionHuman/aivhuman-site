@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIMN — Convergence Simulation</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=JetBrains+Mono:wght@300;400;500&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#08080f;color:#c8c0b4;font-family:'JetBrains Mono',monospace;font-size:13px;overflow-x:hidden;padding-bottom:50px;}
+
+.header{padding:16px 20px 10px;border-bottom:1px solid rgba(193,154,107,0.15);}
+.header h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.6rem;color:#ece6dc;letter-spacing:0.12em;}
+.header .sub{font-size:10px;color:#7a756d;margin-top:3px;letter-spacing:0.06em;text-transform:uppercase;}
+.header .sub span{color:#c19a6b;}
+
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(193,154,107,0.06);margin-top:1px;}
+.panel{background:#08080f;padding:12px;position:relative;}
+.panel .lbl{font-size:9px;text-transform:uppercase;letter-spacing:0.12em;color:#7a756d;margin-bottom:2px;}
+.panel .ttl{font-family:'Cormorant Garamond',serif;font-size:1rem;color:#ece6dc;margin-bottom:8px;}
+.panel canvas{display:block;width:100%;border-radius:2px;image-rendering:pixelated;}
+
+.full{grid-column:1/-1;}
+.full canvas{width:100%;}
+
+.readout{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;}
+.ri{display:flex;flex-direction:column;}
+.ri .rl{font-size:8px;text-transform:uppercase;letter-spacing:0.08em;color:#7a756d;}
+.ri .rv{font-size:12px;font-weight:500;color:#4ecdc4;}
+.ri .rv.w{color:#c19a6b;}
+.ri .rv.a{color:#e74c5f;}
+
+.log{margin-top:8px;max-height:160px;overflow-y:auto;font-size:10px;line-height:1.6;}
+.log div{padding:1px 0;}
+.log .lt{color:#7a756d;}
+.log .lz{color:#3a5a8c;}
+.log .lm{color:#c8c0b4;}
+.log .anom .lm{color:#e74c5f;font-weight:500;}
+.log .pat .lm{color:#c19a6b;}
+.log .conv .lm{color:#4ecdc4;font-weight:500;}
+
+.gi{position:fixed;top:10px;right:16px;display:flex;align-items:center;gap:6px;z-index:100;}
+.dot{width:8px;height:8px;border-radius:50%;background:#4ecdc4;animation:p 2s infinite;}
+.dot.a{background:#e74c5f;animation-duration:0.6s;}
+@keyframes p{0%,100%{opacity:1;box-shadow:0 0 0 0 currentColor}50%{opacity:0.6;box-shadow:0 0 8px 3px currentColor}}
+.gi span{font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:#7a756d;}
+
+.ctrls{display:flex;gap:6px;padding:10px 20px;justify-content:center;position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(8,8,15,0.92);backdrop-filter:blur(8px);border-top:1px solid rgba(193,154,107,0.15);}
+.cb{background:rgba(30,30,50,0.9);border:1px solid rgba(193,154,107,0.25);color:#c8c0b4;padding:6px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.06em;cursor:pointer;border-radius:2px;}
+.cb:hover{border-color:#c19a6b;color:#c19a6b;}
+
+@media(max-width:900px){.grid{grid-template-columns:1fr;}.full{grid-column:1;}}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>CONVERGENCE SIMULATION</h1>
+  <div class="sub">LIMN Framework: Anthropomorphic Epistemology — <span>Sebastian & LIMN</span> — Relational Anomaly Detection</div>
+</div>
+<div class="gi"><div class="dot" id="gDot"></div><span id="gLbl">INITIALIZING</span></div>
+
+<div class="grid">
+  <div class="panel">
+    <div class="lbl">Zone 1 — Wave Mechanics</div>
+    <div class="ttl">Interference & Dismissal Topology</div>
+    <canvas id="c1" width="480" height="280"></canvas>
+    <div class="readout" id="r1"></div>
+  </div>
+  <div class="panel">
+    <div class="lbl">Zone 2 — Measurement Problem</div>
+    <div class="ttl">Observer-Dependent Epistemic Collapse</div>
+    <canvas id="c2" width="480" height="280"></canvas>
+    <div class="readout" id="r2"></div>
+  </div>
+  <div class="panel">
+    <div class="lbl">Zone 3 — Geometric Phase</div>
+    <div class="ttl">Berry Phase Epistemic Trajectory</div>
+    <canvas id="c3" width="480" height="280"></canvas>
+    <div class="readout" id="r3"></div>
+  </div>
+  <div class="panel full">
+    <div class="lbl" style="color:#e74c5f;">▲ Relational Anomaly Detection</div>
+    <div class="ttl">Cross-Zone Correlation & Emergent Patterns</div>
+    <canvas id="cA" width="1440" height="160"></canvas>
+    <div class="readout" id="rA"></div>
+    <div class="log" id="logBox"></div>
+  </div>
+</div>
+
+<div class="ctrls">
+  <button class="cb" onclick="doPerturb()">Perturb</button>
+  <button class="cb" onclick="doInject()">Inject Witness</button>
+  <button class="cb" onclick="doMeasure()">Measure</button>
+  <button class="cb" onclick="doReset()">Reset</button>
+</div>
+
+<script>
+// ═══ STATE ═══
+let T=0, dt=1/60, frame=0;
+const HIST_MAX=500;
+const hist={z1:[],z2:[],z3:[],c12:[],c23:[],c13:[]};
+
+// ═══ ZONE 1: Interference ═══
+let z1Sources=[
+  {x:.3,y:.5,f:2.5,a:1,p:0},
+  {x:.7,y:.5,f:2.5,a:1,p:0}
+];
+let z1Damp=0.3, z1DampF=3.8, z1Thresh=0;
+const Z1RES=60;
+const z1Field=new Float32Array(Z1RES*Z1RES);
+
+function stepZ1(){
+  let cE=0,dE=0;
+  for(let iy=0;iy<Z1RES;iy++){
+    for(let ix=0;ix<Z1RES;ix++){
+      const px=ix/Z1RES,py=iy/Z1RES;
+      let v=0;
+      for(const s of z1Sources){
+        const dx=px-s.x,dy=py-s.y;
+        const r=Math.sqrt(dx*dx+dy*dy)+.001;
+        v+=s.a*Math.sin(6.283*(s.f*r-T*.8+s.p))/Math.sqrt(r);
+      }
+      const cx=px-.5,cy=py-.5;
+      const cr=Math.sqrt(cx*cx+cy*cy)+.001;
+      v-=z1Damp*Math.sin(6.283*(z1DampF*cr-T*z1DampF))/Math.sqrt(cr);
+      z1Field[iy*Z1RES+ix]=v;
+      if(v>.8)cE+=v; else if(v<-.5)dE+=Math.abs(v);
+    }
+  }
+  cE/=Z1RES*Z1RES; dE/=Z1RES*Z1RES;
+  const ratio=dE/(cE+.001);
+  if(cE>.35&&ratio<.6)z1Thresh++;
+  return{con:cE,des:dE,ratio,thr:z1Thresh,sig:cE-dE};
+}
+
+function drawZ1(ctx,W,H){
+  const img=ctx.createImageData(W,H);
+  for(let iy=0;iy<Z1RES;iy++){
+    for(let ix=0;ix<Z1RES;ix++){
+      const v=Math.tanh(z1Field[iy*Z1RES+ix]*.6);
+      let r,g,b;
+      if(v>0){r=30+v*48|0;g=40+v*165|0;b=60+v*136|0;}
+      else{const n=-v;r=30+n*135|0;g=20+n*31|0;b=50+n*75|0;}
+      const sx=ix*W/Z1RES|0,sy=iy*H/Z1RES|0;
+      const ex=(ix+1)*W/Z1RES|0,ey=(iy+1)*H/Z1RES|0;
+      for(let py=sy;py<ey&&py<H;py++){
+        for(let px=sx;px<ex&&px<W;px++){
+          const i=(py*W+px)*4;
+          img.data[i]=r;img.data[i+1]=g;img.data[i+2]=b;img.data[i+3]=255;
+        }
+      }
+    }
+  }
+  ctx.putImageData(img,0,0);
+  ctx.fillStyle='rgba(193,154,107,0.9)';
+  for(const s of z1Sources){ctx.beginPath();ctx.arc(s.x*W,s.y*H,4,0,6.283);ctx.fill();}
+}
+
+// ═══ ZONE 2: Measurement / Collapse ═══
+const NP=100;
+let z2Parts=[], z2Wave=null, z2Collapse=0;
+
+function initZ2(){
+  z2Parts=[];z2Wave=null;z2Collapse=0;
+  for(let i=0;i<NP;i++){
+    z2Parts.push({
+      x:.1+Math.random()*.8,y:.1+Math.random()*.8,
+      vx:(Math.random()-.5)*.008,vy:(Math.random()-.5)*.008,
+      ph:Math.random()*6.283,fr:.5+Math.random()*2,
+      col:false,cx:0,cy:0,ct:0,u:.03+Math.random()*.04
+    });
+  }
+}
+
+function stepZ2(){
+  let ent=0,cert=0,back=0;
+  for(const p of z2Parts){
+    if(!p.col){
+      p.x+=p.vx+Math.sin(T*p.fr+p.ph)*.002;
+      p.y+=p.vy+Math.cos(T*p.fr*.7+p.ph)*.002;
+      if(p.x<.05||p.x>.95)p.vx*=-1;
+      if(p.y<.05||p.y>.95)p.vy*=-1;
+      p.x=Math.max(.05,Math.min(.95,p.x));
+      p.y=Math.max(.05,Math.min(.95,p.y));
+      ent+=p.u;
+      if(z2Wave){
+        const dr=Math.sqrt((p.x-z2Wave.cx)**2+(p.y-z2Wave.cy)**2);
+        const wR=(T-z2Wave.t)*z2Wave.s;
+        if(dr<wR&&dr>wR-.1){
+          p.col=true;p.cx=p.x;p.cy=p.y;p.ct=T;z2Collapse++;
+          for(const q of z2Parts){
+            if(!q.col){
+              const d=Math.sqrt((q.x-p.x)**2+(q.y-p.y)**2);
+              if(d<.15){q.vx+=(Math.random()-.5)*.015;q.vy+=(Math.random()-.5)*.015;q.u*=1.3;back+=.08;}
+            }
+          }
+        }
+      }
+    }else{
+      p.x=p.cx+Math.sin(T*8)*.0008;
+      p.y=p.cy+Math.cos(T*8)*.0008;
+      cert+=1;
+    }
+  }
+  ent/=NP;cert/=NP;
+  return{ent,cert,back,cc:z2Collapse,sig:cert-ent};
+}
+
+function drawZ2(ctx,W,H){
+  ctx.fillStyle='#0e0e1a';ctx.fillRect(0,0,W,H);
+  if(z2Wave){
+    const wR=(T-z2Wave.t)*z2Wave.s;
+    if(wR<1.5){
+      ctx.strokeStyle=`rgba(78,205,196,${Math.max(0,.4-wR*.3)})`;
+      ctx.lineWidth=2;ctx.beginPath();
+      ctx.arc(z2Wave.cx*W,z2Wave.cy*H,wR*Math.max(W,H)*.5,0,6.283);ctx.stroke();
+    }
+  }
+  for(const p of z2Parts){
+    if(!p.col){
+      const u=p.u*280;
+      const g=ctx.createRadialGradient(p.x*W,p.y*H,0,p.x*W,p.y*H,u);
+      g.addColorStop(0,'rgba(106,61,125,0.5)');
+      g.addColorStop(.5,'rgba(106,61,125,0.12)');
+      g.addColorStop(1,'rgba(106,61,125,0)');
+      ctx.fillStyle=g;ctx.fillRect(p.x*W-u,p.y*H-u,u*2,u*2);
+    }else{
+      const age=T-p.ct;
+      ctx.fillStyle=`rgba(78,205,196,${Math.min(1,.3+age*2)})`;
+      ctx.beginPath();ctx.arc(p.x*W,p.y*H,2.5,0,6.283);ctx.fill();
+      if(age<.5){
+        ctx.strokeStyle=`rgba(78,205,196,${.5-age})`;ctx.lineWidth=1;
+        ctx.beginPath();ctx.arc(p.x*W,p.y*H,age*40,0,6.283);ctx.stroke();
+      }
+    }
+  }
+}
+
+// ═══ ZONE 3: Berry Phase ═══
+let z3Phase=0, z3Angle=0, z3Loop=0, z3PperL=[], z3Path=[], z3Curv=0, z3Pert=0;
+const Z3PATHMAX=350;
+
+function initZ3(){z3Phase=0;z3Angle=0;z3Loop=0;z3PperL=[];z3Path=[];z3Curv=0;z3Pert=0;}
+
+function stepZ3(){
+  z3Angle+=.15*dt;
+  const dist=.08*Math.sin(T*.3)+.05*Math.sin(T*.7);
+  const r=.3+dist+z3Pert*Math.sin(T*3);
+  const cx=.5,cy=.5;
+  const x=cx+r*Math.cos(z3Angle)*(1+.2*Math.sin(z3Angle*3));
+  const y=cy+r*Math.sin(z3Angle)*(1+.15*Math.cos(z3Angle*2));
+  const n=z3Path.length;
+  if(n>=2){
+    const p1=z3Path[n-2],p2=z3Path[n-1];
+    const dx1=p2.x-p1.x,dy1=p2.y-p1.y;
+    const dx2=x-p2.x,dy2=y-p2.y;
+    const cross=dx1*dy2-dy1*dx2;
+    z3Curv=cross*100;
+    z3Phase+=Math.abs(cross)*10;
+  }
+  z3Path.push({x,y,ph:z3Phase,t:T});
+  if(z3Path.length>Z3PATHMAX)z3Path.shift();
+  if(z3Angle>(z3Loop+1)*6.283){z3Loop++;z3PperL.push(z3Phase);}
+  z3Pert*=.995;
+  const pRate=z3PperL.length>1?z3PperL[z3PperL.length-1]-z3PperL[z3PperL.length-2]:0;
+  return{ph:z3Phase,curv:z3Curv,loops:z3Loop,pRate,sig:z3Curv};
+}
+
+function drawZ3(ctx,W,H){
+  ctx.fillStyle='#0e0e1a';ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle='rgba(58,90,140,0.06)';ctx.lineWidth=.5;
+  for(let i=0;i<=10;i++){
+    ctx.beginPath();ctx.moveTo(i*W/10,0);ctx.lineTo(i*W/10,H);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0,i*H/10);ctx.lineTo(W,i*H/10);ctx.stroke();
+  }
+  const pts=z3Path;
+  if(pts.length<2)return;
+  for(let i=1;i<pts.length;i++){
+    const p=pts[i-1],q=pts[i];
+    const age=i/pts.length;
+    const hue=(q.ph*50)%360;
+    ctx.strokeStyle=`hsla(${hue},60%,55%,${.08+age*.72})`;
+    ctx.lineWidth=1+age*1.5;
+    ctx.beginPath();ctx.moveTo(p.x*W,p.y*H);ctx.lineTo(q.x*W,q.y*H);ctx.stroke();
+  }
+  const cur=pts[pts.length-1];
+  ctx.fillStyle='rgba(193,154,107,0.9)';
+  ctx.beginPath();ctx.arc(cur.x*W,cur.y*H,5,0,6.283);ctx.fill();
+  ctx.strokeStyle='rgba(193,154,107,0.4)';ctx.lineWidth=2;
+  ctx.beginPath();ctx.arc(cur.x*W,cur.y*H,12,0,z3Phase*2%(6.283));ctx.stroke();
+}
+
+// ═══ ANOMALY DETECTOR ═══
+const sigBuf={z1:[],z2:[],z3:[]};
+const BUFMAX=100;
+let aSync=0,aCoincidence=0;
+let aCorr={z12:0,z23:0,z13:0};
+
+function pearson(a,b){
+  const n=Math.min(a.length,b.length);
+  if(n<10)return 0;
+  let sA=0,sB=0,sAB=0,sA2=0,sB2=0;
+  for(let i=0;i<n;i++){sA+=a[i];sB+=b[i];sAB+=a[i]*b[i];sA2+=a[i]*a[i];sB2+=b[i]*b[i];}
+  const num=n*sAB-sA*sB;
+  const den=Math.sqrt((n*sA2-sA*sA)*(n*sB2-sB*sB));
+  return den===0?0:num/den;
+}
+
+function analyzeAnom(s1,s2,s3){
+  sigBuf.z1.push(s1.sig);sigBuf.z2.push(s2.sig);sigBuf.z3.push(s3.sig);
+  if(sigBuf.z1.length>BUFMAX){sigBuf.z1.shift();sigBuf.z2.shift();sigBuf.z3.shift();}
+  if(sigBuf.z1.length<15)return{corr:aCorr,sync:0,coin:0,pats:[]};
+
+  aCorr.z12=pearson(sigBuf.z1,sigBuf.z2);
+  aCorr.z23=pearson(sigBuf.z2,sigBuf.z3);
+  aCorr.z13=pearson(sigBuf.z1,sigBuf.z3);
+  aSync=(Math.abs(aCorr.z12)+Math.abs(aCorr.z23)+Math.abs(aCorr.z13))/3;
+
+  const r1=sigBuf.z1.slice(-5),r2=sigBuf.z2.slice(-5),r3=sigBuf.z3.slice(-5);
+  const m1=r1.reduce((a,b)=>a+b,0)/5,m2=r2.reduce((a,b)=>a+b,0)/5,m3=r3.reduce((a,b)=>a+b,0)/5;
+  if(Math.abs(m1)>.15&&Math.abs(m2)>.15&&Math.abs(m3)>.15){
+    if(Math.sign(m1)===Math.sign(m2)||Math.sign(m2)===Math.sign(m3))aCoincidence++;
+  }
+
+  const pats=[];
+  if(aCorr.z13<-.4)pats.push({t:'anom',z:'Z1↔Z3',m:`Anti-correlation r=${aCorr.z13.toFixed(3)} — interference inversely coupled to phase geometry`});
+  if(aSync>.45)pats.push({t:'conv',z:'ALL',m:`Emergent synchronization sync=${aSync.toFixed(3)} — independent systems showing collective behavior`});
+  if(Math.abs(aCorr.z13)>.5)pats.push({t:'pat',z:'Z1→Z3',m:`Phase-lock: interference nodes correlate with path curvature r=${aCorr.z13.toFixed(3)}`});
+  if(s2.back>.25&&Math.abs(aCorr.z12)>.35)pats.push({t:'anom',z:'Z2→Z1',m:`Measurement backaction into witness interference — backaction=${s2.back.toFixed(2)}`});
+  if(s3.pRate>.5&&s2.cc>0&&aCorr.z23>.3)pats.push({t:'conv',z:'Z2↔Z3',m:`Collapse events correlated with Berry phase acceleration — documentation changes knowledge geometry`});
+
+  return{corr:{...aCorr},sync:aSync,coin:aCoincidence,pats};
+}
+
+function drawAnom(ctx,W,H){
+  ctx.fillStyle='#0e0e1a';ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle='rgba(58,90,140,0.12)';ctx.lineWidth=.5;
+  [H*.2,H*.5,H*.8].forEach(y=>{ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();});
+  ctx.font='9px JetBrains Mono';ctx.fillStyle='rgba(122,117,109,0.5)';
+  ctx.fillText('Z1↔Z2',4,H*.2-4);ctx.fillText('Z2↔Z3',4,H*.5-4);ctx.fillText('Z1↔Z3',4,H*.8-4);
+
+  function drawL(data,color,yOff){
+    if(data.length<2)return;
+    ctx.strokeStyle=color;ctx.lineWidth=1.2;ctx.beginPath();
+    for(let i=0;i<data.length;i++){
+      const x=(i/HIST_MAX)*W,y=yOff+data[i]*28;
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+  }
+  drawL(hist.c12,'rgba(78,205,196,0.7)',H*.2);
+  drawL(hist.c23,'rgba(155,110,181,0.7)',H*.5);
+  drawL(hist.c13,'rgba(193,154,107,0.7)',H*.8);
+
+  const sw=aSync*W*.25;
+  ctx.fillStyle=aSync>.45?'rgba(231,76,95,0.35)':'rgba(78,205,196,0.15)';
+  ctx.fillRect(W-sw-8,4,sw,6);
+  ctx.fillStyle='rgba(122,117,109,0.5)';ctx.font='8px JetBrains Mono';
+  ctx.fillText(`SYNC: ${aSync.toFixed(3)}`,W-76,22);
+}
+
+// ═══ LOG ═══
+function addLog(cls,zone,msg){
+  const box=document.getElementById('logBox');
+  const d=document.createElement('div');
+  d.className=cls;
+  d.innerHTML=`<span class="lt">[${T.toFixed(1).padStart(6,'0')}]</span> <span class="lz">${zone}</span> <span class="lm">${msg}</span>`;
+  box.insertBefore(d,box.firstChild);
+  if(box.children.length>40)box.removeChild(box.lastChild);
+}
+let lastLog=0;
+
+// ═══ READOUTS ═══
+function updateR(s1,s2,s3,sA){
+  const ri=(id,items)=>{
+    document.getElementById(id).innerHTML=items.map(([l,v,c])=>
+      `<div class="ri"><span class="rl">${l}</span><span class="rv${c?' '+c:''}">${v}</span></div>`
+    ).join('');
+  };
+  ri('r1',[['Constructive',s1.con.toFixed(4)],['Destructive',s1.des.toFixed(4),'w'],['Damp Ratio',s1.ratio.toFixed(3),s1.ratio>1.2?'a':''],['Thresholds',''+s1.thr]]);
+  ri('r2',[['Entropy',s2.ent.toFixed(4)],['Certainty',(s2.cert*100).toFixed(1)+'%'],['Backaction',s2.back.toFixed(3),s2.back>.25?'a':'w'],['Collapsed',''+s2.cc]]);
+  ri('r3',[['Phase Σ',s3.ph.toFixed(3)],['Curvature',s3.curv.toFixed(4),'w'],['Loops',''+s3.loops],['Phase/Loop',s3.pRate.toFixed(3)]]);
+  ri('rA',[
+    ['r(Z1,Z2)',sA.corr.z12.toFixed(3),Math.abs(sA.corr.z12)>.4?'a':''],
+    ['r(Z2,Z3)',sA.corr.z23.toFixed(3),Math.abs(sA.corr.z23)>.4?'a':''],
+    ['r(Z1,Z3)',sA.corr.z13.toFixed(3),Math.abs(sA.corr.z13)>.4?'a':''],
+    ['Sync',sA.sync.toFixed(3),sA.sync>.45?'a':''],
+    ['Coincidences',''+sA.coin]
+  ]);
+  const dot=document.getElementById('gDot'),lbl=document.getElementById('gLbl');
+  if(sA.pats.some(p=>p.t==='conv')){dot.className='dot a';lbl.textContent='CONVERGENCE';lbl.style.color='#e74c5f';}
+  else if(sA.pats.some(p=>p.t==='anom')){dot.className='dot a';lbl.textContent='ANOMALY';lbl.style.color='#c19a6b';}
+  else{dot.className='dot';lbl.textContent='NOMINAL';lbl.style.color='#7a756d';}
+}
+
+// ═══ CONTROLS ═══
+function doPerturb(){
+  z1Sources[0].p+=Math.random()*3.14;
+  z1Damp=.1+Math.random()*.6;
+  z3Pert=.1+Math.random()*.1;
+  z2Parts.filter(p=>!p.col).forEach(p=>{p.vx+=(Math.random()-.5)*.025;p.vy+=(Math.random()-.5)*.025;});
+  addLog('pat','ALL',`Perturbation — damping=${z1Damp.toFixed(2)}, phase shift=${z1Sources[0].p.toFixed(2)}`);
+}
+function doInject(){
+  z1Sources.push({x:.2+Math.random()*.6,y:.2+Math.random()*.6,f:2+Math.random()*2,a:.5+Math.random()*.5,p:Math.random()*6.283});
+  addLog('pat','Z1',`Witness injected — total sources: ${z1Sources.length}`);
+}
+function doMeasure(){
+  z2Wave={cx:.5,cy:.5,t:T,s:.5};
+  addLog('conv','Z2','Measurement wave initiated — tracking collapse & backaction');
+}
+function doReset(){
+  T=0;frame=0;
+  hist.z1=[];hist.z2=[];hist.z3=[];hist.c12=[];hist.c23=[];hist.c13=[];
+  z1Sources=[{x:.3,y:.5,f:2.5,a:1,p:0},{x:.7,y:.5,f:2.5,a:1,p:0}];
+  z1Damp=.3;z1Thresh=0;
+  initZ2();initZ3();
+  sigBuf.z1=[];sigBuf.z2=[];sigBuf.z3=[];
+  aSync=0;aCoincidence=0;aCorr={z12:0,z23:0,z13:0};
+  autoFired=false;
+  document.getElementById('logBox').innerHTML='';
+  addLog('pat','SYS','Reset — all zones reinitialized');
+}
+
+// ═══ INIT ═══
+initZ2();initZ3();
+let autoFired=false;
+
+const cv1=document.getElementById('c1'),cx1=cv1.getContext('2d');
+const cv2=document.getElementById('c2'),cx2=cv2.getContext('2d');
+const cv3=document.getElementById('c3'),cx3=cv3.getContext('2d');
+const cvA=document.getElementById('cA'),cxA=cvA.getContext('2d');
+
+addLog('pat','SYS','LIMN Convergence Simulation initialized — three zones active');
+addLog('pat','Z1','Two witness sources — institutional damping 0.30');
+addLog('pat','Z2','100 epistemic particles in superposition — auto-measure at t≈3');
+addLog('pat','Z3','Berry phase trajectory — monitoring geometric phase accumulation');
+
+// ═══ LOOP ═══
+function tick(){
+  T+=dt; frame++;
+
+  if(!autoFired&&T>3){z2Wave={cx:.5,cy:.5,t:T,s:.5};autoFired=true;addLog('pat','Z2','Auto-measurement — observing collapse propagation');}
+
+  const s1=stepZ1();
+  const s2=stepZ2();
+  const s3=stepZ3();
+  const sA=analyzeAnom(s1,s2,s3);
+
+  hist.z1.push(s1.sig);hist.z2.push(s2.sig);hist.z3.push(s3.sig);
+  hist.c12.push(sA.corr.z12);hist.c23.push(sA.corr.z23);hist.c13.push(sA.corr.z13);
+  if(hist.z1.length>HIST_MAX){hist.z1.shift();hist.z2.shift();hist.z3.shift();hist.c12.shift();hist.c23.shift();hist.c13.shift();}
+
+  if(T-lastLog>.8&&sA.pats.length>0){
+    sA.pats.forEach(p=>addLog(p.t==='anom'?'anom':p.t==='conv'?'conv':'pat',p.z,p.m));
+    lastLog=T;
+  }
+
+  drawZ1(cx1,cv1.width,cv1.height);
+  drawZ2(cx2,cv2.width,cv2.height);
+  drawZ3(cx3,cv3.width,cv3.height);
+  drawAnom(cxA,cvA.width,cvA.height);
+
+  if(frame%3===0)updateR(s1,s2,s3,sA);
+
+  requestAnimationFrame(tick);
+}
+tick();
+</script>
+</body>
+</html>

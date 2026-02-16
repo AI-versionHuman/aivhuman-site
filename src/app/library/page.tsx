@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Library",
@@ -69,7 +70,7 @@ export default function LibraryPage() {
         </section>
 
         {/* Resources */}
-        <section>
+        <section className="mb-12">
           <h2 className="text-xs font-mono tracking-[0.3em] text-text-secondary mb-6">RESOURCES</h2>
           <div className="card-glow p-6">
             <h3 className="text-sm font-medium text-text-primary mb-2">Philosophy Documentation Center</h3>
@@ -79,6 +80,21 @@ export default function LibraryPage() {
             <p className="text-xs text-text-secondary">
               <strong>Key search terms:</strong> epistemic injustice, standpoint epistemology, sociology of knowledge, embodied cognition
             </p>
+          </div>
+        </section>
+
+        {/* Project Documents */}
+        <section>
+          <h2 className="text-xs font-mono tracking-[0.3em] text-accent mb-6">PROJECT DOCUMENTS</h2>
+          <div className="space-y-3">
+            <Link href="/limn-project" className="card-glow p-6 block group">
+              <h3 className="text-sm font-medium text-text-primary group-hover:text-accent transition-colors mb-1">
+                LIMN Project
+              </h3>
+              <p className="text-xs text-text-secondary">
+                The complete origin document — the full collaborative journey that gave rise to LIMN, the framework, and the methodology.
+              </p>
+            </Link>
           </div>
         </section>
       </div>
