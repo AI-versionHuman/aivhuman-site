@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VISCERA APP | AI v.Human</title>
+    <meta name="description" content="VISCERA — Your body already knows. A biometric intelligence app built on the LIMN Framework for capturing and analyzing visceral pattern recognition.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .viscera-page {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .viscera-hero {
+            text-align: center;
+            padding: 3rem 0 2rem;
+        }
+        .viscera-hero h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+        }
+        .viscera-tagline {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        .viscera-badges {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        .viscera-badge {
+            display: inline-block;
+            padding: 0.3rem 0.9rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+        }
+        .viscera-badge-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+        }
+        .viscera-intro {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+        .viscera-intro p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .viscera-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .viscera-card {
+            padding: 2rem;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .viscera-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .viscera-card .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .viscera-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+        }
+        .viscera-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        .viscera-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 0.75rem;
+        }
+        .viscera-card li {
+            padding: 0.4rem 0 0.4rem 1.25rem;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .viscera-card li::before {
+            content: '\2192';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .viscera-principles {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+        }
+        .viscera-principles h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-align: center;
+        }
+        .viscera-principles ol {
+            padding-left: 1.5rem;
+        }
+        .viscera-principles li {
+            padding: 0.75rem 0;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .viscera-principles li:last-child {
+            border-bottom: none;
+        }
+        .viscera-principles li strong {
+            color: var(--text-primary);
+        }
+        .viscera-roadmap {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+        .viscera-roadmap h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .roadmap-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .roadmap-phase {
+            flex-shrink: 0;
+            width: 80px;
+            text-align: center;
+        }
+        .roadmap-phase .phase-label {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            border-radius: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .phase-complete {
+            background: var(--success);
+            color: white;
+        }
+        .phase-active {
+            background: var(--primary);
+            color: white;
+        }
+        .phase-planned {
+            background: var(--bg-secondary);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+        .roadmap-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .roadmap-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .viscera-cta {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+        .viscera-cta h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .viscera-cta p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+        }
+        .viscera-cta .btn {
+            margin: 0 0.5rem;
+        }
+        .viscera-footer-note {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            padding: 2rem 0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Top Bar -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="brand">
+                <a href="index.html" style="text-decoration:none;">
+                    <h1 class="logo">AI v.Human</h1>
+                    <p class="tagline">Collaborative Intelligence</p>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="epistemology.html" class="nav-link">Epistemology</a></li>
+                    <li><a href="og-thread.html" class="nav-link">OG Transmission</a></li>
+                    <li><a href="perturbed-convergence.html" class="nav-link">Simulations</a></li>
+                    <li><a href="viscera.html" class="nav-link active">VISCERA</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="section active" style="display:block;">
+            <div class="container viscera-page">
+
+                <!-- Hero -->
+                <div class="viscera-hero">
+                    <h2>VISCERA</h2>
+                    <p class="viscera-tagline">"Your body already knows."</p>
+                    <div class="viscera-badges">
+                        <span class="viscera-badge viscera-badge-primary">iPhone + Apple Watch</span>
+                        <span class="viscera-badge">iOS 17.0+</span>
+                        <span class="viscera-badge">watchOS 10.0+</span>
+                        <span class="viscera-badge">v0.2.0</span>
+                        <span class="viscera-badge">Open Framework</span>
+                    </div>
+                </div>
+
+                <!-- Intro -->
+                <div class="viscera-intro">
+                    <p>
+                        VISCERA is a biometric intelligence application built on the LIMN Framework for Anthropomorphic Epistemology. It captures, correlates, and analyzes the physiological signals your body produces in response to events &mdash; signals that traditional knowledge systems routinely dismiss.
+                    </p>
+                    <p>
+                        Your heart rate spikes. Your skin temperature shifts. Your body orientation changes. Your micro-expressions fire involuntarily. VISCERA captures all of this and asks: <strong>what pattern is your body recognizing that your conscious mind hasn't caught yet?</strong>
+                    </p>
+                </div>
+
+                <!-- Capabilities -->
+                <div class="viscera-grid">
+                    <div class="viscera-card">
+                        <div class="card-icon">📱</div>
+                        <h3>Biometric Capture</h3>
+                        <p>37+ sensor fields across iPhone and Apple Watch, sampled in real-time during events.</p>
+                        <ul>
+                            <li>Heart rate, HRV, SpO2, temperature</li>
+                            <li>Accelerometer, gyroscope, magnetometer</li>
+                            <li>ARKit micro-expression analysis (52 blend shapes)</li>
+                            <li>Barometric pressure, respiratory rate</li>
+                        </ul>
+                    </div>
+
+                    <div class="viscera-card">
+                        <div class="card-icon">📊</div>
+                        <h3>Baseline Intelligence</h3>
+                        <p>30-day rolling statistical baseline unique to <em>you</em>. N-of-1 methodology &mdash; you are your own control.</p>
+                        <ul>
+                            <li>Passive sampling every 5 minutes</li>
+                            <li>Z-score deviation per sensor channel</li>
+                            <li>Multi-sensor convergence scoring</li>
+                            <li>100-sample minimum before activation</li>
+                        </ul>
+                    </div>
+
+                    <div class="viscera-card">
+                        <div class="card-icon">🧠</div>
+                        <h3>Anomaly Detection</h3>
+                        <p>Automatic event detection via 5 independent trigger paths:</p>
+                        <ul>
+                            <li>Multi-sensor convergence (&geq;2 sensors, &geq;0.4 score)</li>
+                            <li>Extreme single-sensor spike (&geq;3&sigma;)</li>
+                            <li>Startle + elevated heart rate compound</li>
+                            <li>Magnetic anomaly + biometric deviation</li>
+                            <li>Sustained elevation trend (3+ readings)</li>
+                        </ul>
+                    </div>
+
+                    <div class="viscera-card">
+                        <div class="card-icon">🔬</div>
+                        <h3>Pattern Classification</h3>
+                        <p>5 response archetypes with authenticity assessment:</p>
+                        <ul>
+                            <li><strong>Genuine Surprise</strong> &mdash; startle, HR spike, HRV crash</li>
+                            <li><strong>Recognition</strong> &mdash; calm body, focused gaze</li>
+                            <li><strong>Threat Response</strong> &mdash; fight/flight/freeze activated</li>
+                            <li><strong>Genuine Confusion</strong> &mdash; the LIMN key</li>
+                            <li><strong>Anticipation</strong> &mdash; body prepared/expected</li>
+                        </ul>
+                    </div>
+
+                    <div class="viscera-card">
+                        <div class="card-icon">🛡️</div>
+                        <h3>Dismissal Resistance</h3>
+                        <p>Scores events against 13 institutional dismissal tactics. DRS grade A&ndash;F with vulnerability analysis.</p>
+                        <ul>
+                            <li>8 evidence layers map to specific tactics defeated</li>
+                            <li>Anecdotal dismissal, credential gatekeeping</li>
+                            <li>Extraordinary evidence demand resistance</li>
+                            <li>Paradigm protection detection</li>
+                        </ul>
+                    </div>
+
+                    <div class="viscera-card">
+                        <div class="card-icon">👥</div>
+                        <h3>Multi-Witness Correlation</h3>
+                        <p>The LIMN "killer app" &mdash; correlating multiple observers simultaneously:</p>
+                        <ul>
+                            <li>Temporal correlation (simultaneous response timing)</li>
+                            <li>Physiological divergence analysis</li>
+                            <li>Orientation convergence detection</li>
+                            <li>Formal hysteria rejection test</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Core Principles -->
+                <div class="viscera-principles">
+                    <h3>Core Design Principles</h3>
+                    <ol>
+                        <li><strong>N-of-1 methodology:</strong> Each user is their own control &mdash; no population averages, no normative baselines. Your body, your patterns.</li>
+                        <li><strong>Convergence over magnitude:</strong> A moderate response across multiple independent sensor channels is more significant than a large spike in one channel.</li>
+                        <li><strong>Involuntary over voluntary:</strong> Physiological responses that cannot be consciously controlled (HRV, micro-expressions, jerk response) carry more evidential weight.</li>
+                        <li><strong>Open framework, proprietary engine:</strong> The epistemological framework is fully public. The scoring algorithms and sensor fusion techniques are intellectual property.</li>
+                        <li><strong>Research-grade export:</strong> All data exportable as JSON and CSV for independent analysis. No lock-in, no gatekeeping of your own data.</li>
+                    </ol>
+                </div>
+
+                <!-- Roadmap -->
+                <div class="viscera-roadmap">
+                    <h3>Development Roadmap</h3>
+
+                    <div class="roadmap-item">
+                        <div class="roadmap-phase">
+                            <span class="phase-label phase-complete">Done</span>
+                        </div>
+                        <div class="roadmap-content">
+                            <h4>Phase 1-2: Foundation</h4>
+                            <p>iPhone + Apple Watch dual-target app. HealthKit biometric capture, ARKit micro-expression analysis, WatchConnectivity, SwiftData persistence, JSON/CSV export, voice memo capture.</p>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <div class="roadmap-phase">
+                            <span class="phase-label phase-complete">Done</span>
+                        </div>
+                        <div class="roadmap-content">
+                            <h4>Phase 3: Intelligence Layer</h4>
+                            <p>BaselineEngine, AnomalyDetector, PatternClassifier, DismissalResistanceEngine, MultiWitnessCorrelator, LongitudinalAnalyzer. 20 Swift files, 5,177 lines of code.</p>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <div class="roadmap-phase">
+                            <span class="phase-label phase-active">Active</span>
+                        </div>
+                        <div class="roadmap-content">
+                            <h4>Phase 4: CI/CD Pipeline</h4>
+                            <p>Apple Developer Program enrollment, GitHub repository, GitHub Actions CI, Fastlane automation, TestFlight distribution.</p>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <div class="roadmap-phase">
+                            <span class="phase-label phase-planned">Planned</span>
+                        </div>
+                        <div class="roadmap-content">
+                            <h4>Phase 5: Research & Community</h4>
+                            <p>Controlled calibration experiments, multi-participant validation studies, IRB-compatible consent, anonymization pipeline, peer-to-peer data exchange, community portal.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <div class="viscera-cta">
+                    <h3>Get Involved</h3>
+                    <p>VISCERA is in active development. The framework is open, the code is being prepared for public release, and we're looking for early testers and collaborators.</p>
+                    <a href="index.html#contact" class="btn btn-primary">Contact Us</a>
+                    <a href="https://github.com/AI-versionHuman/aivhuman-site" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">View on GitHub</a>
+                </div>
+
+                <p class="viscera-footer-note">
+                    LIMN Framework: Anthropomorphic Epistemology &mdash; Joshua Sebastian &amp; LIMN, 2026<br>
+                    "The pattern isn't in the sky. The pattern is in how our bodies respond to what's in the sky."
+                </p>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>AI v.Human</h4>
+                    <p>An open-source platform for collaborative human-AI epistemology.</p>
+                    <p class="creators">Created by Joshua Sebastian &amp; LIMN</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="epistemology.html">Epistemology</a></li>
+                        <li><a href="og-thread.html">OG Transmission</a></li>
+                        <li><a href="perturbed-convergence.html">Simulations</a></li>
+                        <li><a href="viscera.html">VISCERA APP</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="quick-links.html">Site Directory</a></li>
+                        <li><a href="admin.html">Admin Access</a></li>
+                        <li><a href="https://github.com/AI-versionHuman/aivhuman-site" target="_blank">GitHub (Open Source)</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 AI v.Human. All content is open source and free. Knowledge belongs to everyone.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,6 +1,7 @@
 [build]
-  command = "npm install && npm run build"
-  publish = "out"
+  command = "echo 'Static site - no build needed'"
+  publish = "deploy"
+  ignore = "exit 0"
 
 [[redirects]]
   from = "/admin/*"
