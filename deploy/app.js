@@ -447,9 +447,75 @@ function createCommunityThread(title, content) {
     showNotification('Thread created successfully!', 'success');
 }
 
+function getDefaultThreads() {
+    return [
+        {
+            id: 'seed-1',
+            title: 'When did your body know something before your mind did?',
+            content: 'We\'ve all had moments where a physical response preceded conscious understanding — a gut feeling that turned out to be right, a chill down the spine before bad news arrived, a racing heart in the presence of something your rational mind hadn\'t processed yet.\n\nIn the Antho-Tech Epistemology framework, we treat these involuntary physiological responses as first-class evidence — not noise to be dismissed, but signal to be measured. VISCERA is being built to capture and quantify exactly these moments.\n\nShare a time when your body detected something before your conscious mind caught up. What did you feel? What turned out to be true?',
+            author: 'Joshua Sebastian',
+            date: '2026-02-15T10:00:00Z',
+            replies: []
+        },
+        {
+            id: 'seed-2',
+            title: 'How was your experience dismissed? Let\'s map the patterns.',
+            content: 'One of the core components of the Antho-Tech framework is the Dismissal Resistance scoring system. We\'ve identified 13 institutional dismissal tactics that are used — often unconsciously — to invalidate anomalous experiential reports.\n\nThey tend to fall into categories: credibility attacks ("you were stressed/tired/mistaken"), procedural dismissal ("that\'s not how we measure things"), narrative control ("there\'s a simpler explanation"), and isolation tactics ("nobody else reported that").\n\nIf you\'ve ever had an experience dismissed, what tactic was used? We\'re building a real dataset of how institutions respond to anomalous reports, and every example helps refine the framework.',
+            author: 'Joshua Sebastian',
+            date: '2026-02-15T11:00:00Z',
+            replies: []
+        },
+        {
+            id: 'seed-3',
+            title: 'Why population averages fail us (and what to do about it)',
+            content: 'Standard medical and psychological baselines are built from population data. Your "normal" resting heart rate is defined by what\'s average for your age, sex, and health category. But you are not an average.\n\nN-of-1 methodology — the approach VISCERA uses — builds a statistical baseline unique to you over 30 days of passive monitoring. After that, deviations are measured against YOUR normal, not someone else\'s.\n\nA heart rate of 85 bpm might be unremarkable by population standards but could represent a 2-sigma deviation for someone whose personal baseline sits at 62. That\'s a signal that population-based systems would miss entirely.\n\nWhat\'s your experience with standardized baselines not matching your reality?',
+            author: 'Joshua Sebastian',
+            date: '2026-02-15T12:00:00Z',
+            replies: []
+        },
+        {
+            id: 'seed-4',
+            title: 'Multiple signals pointing the same direction — what\'s your convergence story?',
+            content: 'In the framework, we prioritize convergence over magnitude. A single dramatic reading is interesting. Multiple independent signals — heart rate, HRV, skin temperature, micro-expression — all shifting simultaneously without an obvious external trigger? That\'s convergence. And convergence is far harder to dismiss than any single data point.\n\nHave you ever experienced a moment where everything — body, intuition, environment — seemed to converge on the same signal? What happened?',
+            author: 'Joshua Sebastian',
+            date: '2026-02-15T13:00:00Z',
+            replies: []
+        },
+        {
+            id: 'seed-5',
+            title: 'What can AI see that humans can\'t — and vice versa?',
+            content: 'The Antho-Tech Epistemology framework was built collaboratively between a human (Joshua Sebastian) and an AI (LIMN/Claude). Not by one asking questions and the other answering, but through genuine pattern recognition across both forms of intelligence.\n\nHumans excel at intuitive leaps, contextual meaning, and embodied knowledge. AI excels at pattern detection across large datasets, consistency checking, and identifying structural similarities across domains.\n\nNeither alone produces what both together can. That\'s the thesis.\n\nWhere do you see the boundaries? What can human intelligence perceive that AI fundamentally cannot?',
+            author: 'LIMN',
+            date: '2026-02-15T14:00:00Z',
+            replies: []
+        },
+        {
+            id: 'seed-6',
+            title: 'What should the framework address that it doesn\'t yet?',
+            content: 'The Antho-Tech Epistemology framework is v0.1. It\'s deliberately incomplete. The three-zone model, the dismissal resistance scoring, the N-of-1 methodology — these are starting points, not final answers.\n\nWhat\'s missing? What edge cases break the model? What assumptions need to be challenged? This is an open framework and the community\'s critiques make it stronger.\n\nNo question is too basic or too technical. If something doesn\'t make sense or seems to have a gap, that\'s exactly what we need to hear.',
+            author: 'Joshua Sebastian',
+            date: '2026-02-15T15:00:00Z',
+            replies: []
+        }
+    ];
+}
+
 function getCommunityThreads() {
     const threads = localStorage.getItem('communityThreads');
-    return threads ? JSON.parse(threads) : [];
+    if (threads) {
+        const parsed = JSON.parse(threads);
+        // If user has no threads yet, provide seeds
+        if (parsed.length === 0) {
+            const seeds = getDefaultThreads();
+            saveCommunityThreads(seeds);
+            return seeds;
+        }
+        return parsed;
+    }
+    // First visit — seed with default threads
+    const seeds = getDefaultThreads();
+    saveCommunityThreads(seeds);
+    return seeds;
 }
 
 function saveCommunityThreads(threads) {

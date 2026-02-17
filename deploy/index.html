@@ -50,6 +50,7 @@
                     <li><a href="og-thread.html" class="nav-link">OG Transmission</a></li>
                     <li><a href="perturbed-convergence.html" class="nav-link">Simulations</a></li>
                     <li><a href="viscera.html" class="nav-link">VISCERA APP</a></li>
+                    <li><a href="framework-paper.html" class="nav-link">Framework Paper</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
             </nav>
@@ -101,6 +102,33 @@
                             <p>No community threads yet. Be the first to start a conversation!</p>
                         </div>
                     </div>
+                </div>
+
+                <!-- Early Access -->
+                <div class="early-access-card" style="margin-top: 2.5rem;">
+                    <h3 class="section-title" style="font-size:1.5rem;">What Is Your Body Detecting?</h3>
+                    <p class="early-access-desc">VISCERA turns involuntary physiological responses into evidence-grade data. Join the early access list for beta testing and research updates.</p>
+                    <form name="early-access" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="early-access-form" id="earlyAccessFormHome">
+                        <p style="display:none;"><label>Don't fill this out: <input name="bot-field" /></label></p>
+                        <input type="hidden" name="form-name" value="early-access" />
+                        <div class="form-row">
+                            <div class="form-group" style="flex:2;">
+                                <input type="email" name="email" placeholder="your@email.com" required>
+                            </div>
+                            <div class="form-group" style="flex:1;">
+                                <select name="interest">
+                                    <option value="" disabled selected>I'm interested in...</option>
+                                    <option value="beta-tester">Beta testing VISCERA</option>
+                                    <option value="researcher">Research collaboration</option>
+                                    <option value="framework">Epistemology framework</option>
+                                    <option value="community">Community discussion</option>
+                                    <option value="all">Everything</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Get Early Access</button>
+                        <p class="early-access-fine">No spam. Data belongs to you — always.</p>
+                    </form>
                 </div>
             </div>
         </section>
