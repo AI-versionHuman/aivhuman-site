@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Lab | AI v.Human — Collaborative Intelligence Platform</title>
+<meta name="description" content="Original research exploring the statistical and mathematical foundations of collaborative intelligence. Phase transition hypothesis, catastrophe theory, and human-AI coupling.">
+<meta property="og:title" content="Research Lab | AI v.Human">
+<meta property="og:description" content="Where the math meets the method. Original research into discontinuous gains beyond diminishing returns.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aivhuman.netlify.app/research">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0c;
+    --bg-secondary: #111114;
+    --bg-card: #16161a;
+    --bg-elevated: #1c1c22;
+    --text-primary: #e8e6e3;
+    --text-secondary: #9a9590;
+    --text-muted: #5a5550;
+    --accent-red: #c43e3e;
+    --accent-red-dim: #8a2c2c;
+    --accent-green: #3a8a5c;
+    --accent-blue: #4a7ab5;
+    --accent-gold: #b89a5a;
+    --border: #2a2a30;
+    --border-light: #333338;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ===== NAV ===== */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 3rem;
+    background: rgba(10, 10, 12, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent-red); }
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    padding: 10rem 3rem 5rem;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse 800px 400px at 20% 50%, rgba(196, 62, 62, 0.06), transparent),
+      radial-gradient(ellipse 600px 300px at 80% 30%, rgba(74, 122, 181, 0.04), transparent);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent-red);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+  .hero h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.15;
+    max-width: 800px;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent-red);
+  }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  /* ===== PAPER CARD ===== */
+  .papers-section {
+    padding: 2rem 3rem 6rem;
+  }
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .paper-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 3rem;
+    margin-bottom: 2rem;
+    position: relative;
+    transition: border-color 0.4s;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+  .paper-card:hover { border-color: var(--border-light); }
+  .paper-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(180deg, var(--accent-red), var(--accent-red-dim), transparent);
+    border-radius: 2px 0 0 2px;
+  }
+
+  .paper-status {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    background: rgba(184, 154, 90, 0.1);
+    border: 1px solid rgba(184, 154, 90, 0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+    margin-bottom: 1.2rem;
+  }
+
+  .paper-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+  }
+  .paper-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .paper-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .meta-item {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  .meta-item strong {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .paper-abstract {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.85;
+    margin-bottom: 2rem;
+    max-width: 720px;
+  }
+
+  .paper-equations {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+  }
+  .paper-equations h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+  .eq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.8rem;
+  }
+  .eq-item {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .eq-item span {
+    color: var(--accent-red);
+    font-weight: 500;
+  }
+
+  .paper-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    background: var(--accent-red);
+    border: none;
+    padding: 0.85rem 1.8rem;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-primary:hover { background: #d44a4a; transform: translateY(-1px); }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 0.85rem 1.8rem;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover { border-color: var(--text-muted); color: var(--text-primary); }
+
+  /* ===== KEY FINDINGS GRID ===== */
+  .findings {
+    padding: 0 3rem 6rem;
+  }
+  .findings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .finding-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 2rem;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .finding-card:hover { border-color: var(--border-light); transform: translateY(-2px); }
+  .finding-number {
+    font-family: 'Instrument Serif', serif;
+    font-size: 2.5rem;
+    color: var(--accent-red-dim);
+    line-height: 1;
+    margin-bottom: 0.8rem;
+  }
+  .finding-card h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+    color: var(--text-primary);
+  }
+  .finding-card p {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  /* ===== COLLAB SIGNAL ===== */
+  .collab-note {
+    margin: 0 3rem 5rem;
+    padding: 2.5rem 3rem;
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--accent-green);
+    border-radius: 0 2px 2px 0;
+  }
+  .collab-note h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-green);
+    margin-bottom: 1rem;
+  }
+  .collab-note p {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 680px;
+  }
+
+  /* ===== BACK LINK ===== */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 0 3rem;
+    margin-bottom: 2rem;
+    transition: color 0.3s;
+  }
+  .back-link:hover { color: var(--text-primary); }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    padding: 3rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  .footer p {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+  .footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer a:hover { color: var(--text-secondary); }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .nav-links a { font-size: 0.65rem; }
+    .hero { padding: 8rem 1.5rem 3rem; }
+    .papers-section, .findings { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .paper-card { padding: 2rem; }
+    .paper-meta { flex-direction: column; gap: 0.8rem; }
+    .collab-note { margin: 0 1.5rem 4rem; padding: 2rem; }
+    .eq-grid { grid-template-columns: 1fr; }
+    .back-link { padding: 0 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" class="nav-logo">AI <span>v</span> Human</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/framework-paper">Framework</a>
+    <a href="/viscera">VISCERA</a>
+    <a href="/research" class="active">Research</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-label">Research Lab</div>
+  <h1>Where the <em>math</em> meets the method</h1>
+  <p class="hero-sub">
+    Original research exploring the statistical and mathematical foundations of collaborative intelligence. 
+    Every claim is grounded in provable equations. Every model is falsifiable. This is where LIMN gets its rigor.
+  </p>
+</section>
+
+<!-- PAPERS -->
+<section class="papers-section">
+  <div class="section-label">Published Research — February 2026</div>
+
+  <div class="paper-card">
+    <div class="paper-status">New Research</div>
+    <h2 class="paper-title">Anomalous Data or Phase Transition?</h2>
+    <p class="paper-subtitle">A Statistical Inquiry into Discontinuous Gains Beyond Diminishing Returns</p>
+
+    <div class="paper-meta">
+      <div class="meta-item"><strong>Authors:</strong> Joshua Sebastian &amp; Claude (Anthropic)</div>
+      <div class="meta-item"><strong>Date:</strong> February 2026</div>
+      <div class="meta-item"><strong>Pages:</strong> 4</div>
+      <div class="meta-item"><strong>Status:</strong> Discussion Draft</div>
+    </div>
+
+    <p class="paper-abstract">
+      Standard models predict sigmoid growth with asymptotic flattening. But what happens when anomalous 
+      data clusters near the ceiling? This paper presents evidence — from AI benchmark performance data 
+      (2012–2025) and catastrophe theory — that these anomalies are not noise but signals of phase 
+      transitions: points where the governing dynamics of a system fundamentally change. We formalize 
+      nine provable equations mapping the logistic model, cusp catastrophe bifurcation conditions, 
+      power law distributions, dimensional carrying capacity, critical slowing down, and mutual 
+      information to testable predictions about where collaborative human-AI systems may access 
+      qualitatively different output regimes.
+    </p>
+
+    <div class="paper-equations">
+      <h4>Key Equations (9 total, all provable &amp; solvable)</h4>
+      <div class="eq-grid">
+        <div class="eq-item"><span>Eq. 1</span> — Logistic Growth Model</div>
+        <div class="eq-item"><span>Eq. 2</span> — Cusp Catastrophe Potential</div>
+        <div class="eq-item"><span>Eq. 3</span> — Equilibrium Condition (Cubic)</div>
+        <div class="eq-item"><span>Eq. 4</span> — Discriminant of the Cusp</div>
+        <div class="eq-item"><span>Eq. 5</span> — Bifurcation Set Boundary</div>
+        <div class="eq-item"><span>Eq. 6</span> — Power Law Distribution</div>
+        <div class="eq-item"><span>Eq. 7</span> — Dimensional Carrying Capacity</div>
+        <div class="eq-item"><span>Eq. 8</span> — Critical Slowing Down</div>
+        <div class="eq-item"><span>Eq. 9</span> — Mutual Information (Sweet Spot)</div>
+      </div>
+    </div>
+
+    <div class="paper-actions">
+      <a href="/research/phase-transition-hypothesis.pdf" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PDF
+      </a>
+      <a href="/framework-paper" class="btn-secondary">
+        View LIMN Framework →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- KEY FINDINGS -->
+<section class="findings">
+  <div class="section-label">Key Findings</div>
+  <div class="findings-grid">
+    <div class="finding-card">
+      <div class="finding-number">01</div>
+      <h3>The Dip Precedes the Breakout</h3>
+      <p>Systems approaching a phase transition perform worst immediately before the jump. Premature abandonment during this dip is the most common error in resource allocation.</p>
+    </div>
+    <div class="finding-card">
+      <div class="finding-number">02</div>
+      <h3>Benchmark ≠ Capability</h3>
+      <p>AI benchmark saturation (ImageNet, MMLU) reflects instrument limits, not system limits. Real capability growth contains discontinuities invisible to saturated benchmarks.</p>
+    </div>
+    <div class="finding-card">
+      <div class="finding-number">03</div>
+      <h3>The Sweet Spot Is Dimensional</h3>
+      <p>The collaborative sweet spot isn't a point on the existing curve — it's evidence of a higher-dimensional output space accessible only through human-AI coupling at intermediate intensity.</p>
+    </div>
+    <div class="finding-card">
+      <div class="finding-number">04</div>
+      <h3>Nine Equations, All Testable</h3>
+      <p>Every claim is backed by provable mathematics from catastrophe theory, information theory, and statistical distribution theory. All predictions are empirically falsifiable.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COLLABORATION NOTE -->
+<div class="collab-note">
+  <h3>On Methodology</h3>
+  <p>
+    This research was produced through human-AI collaborative analysis — the same methodology it investigates. 
+    The initial pattern recognition (anomalous data near asymptotes resembling phase transitions) originated 
+    from human intuition grounded in statistical reasoning coursework. The mathematical formalization, 
+    benchmark data compilation, and visualization were developed iteratively through reciprocal exchange 
+    between human and AI. Neither agent could have produced this document alone. That is the point.
+  </p>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p><a href="/">AI v Human</a> — Collaborative Intelligence Platform &copy; 2026</p>
+</footer>
+
+</body>
+</html>
