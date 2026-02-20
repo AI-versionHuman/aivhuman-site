@@ -8,6 +8,7 @@ const sidebarLinks = [
   { href: "/epistemology", label: "Epistemology", icon: "◆" },
   { href: "/og-thread", label: "OG Transmission", icon: "▹" },
   { href: "/research", label: "Research", icon: "◈" },
+  { href: "/research-lab", label: "Research Lab", icon: "◎" },
   { href: "/perturbed-convergence", label: "Convergence Sims", icon: "⟐" },
   { href: "/viscera", label: "VISCERA APP", icon: "◉" },
 ];
