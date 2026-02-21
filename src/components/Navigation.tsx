@@ -11,7 +11,9 @@ const navLinks = [
   { href: "/epistemology", label: "Theory" },
   { href: "/og-thread", label: "OG Thread" },
   { href: "/research", label: "Research" },
+  { href: "/perturbed-convergence", label: "Simulations" },
   { href: "/library", label: "Library" },
+  { href: "/viscera", label: "VISCERA APP" },
   { href: "/about", label: "About" },
 ];
 

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copyright &amp; Licensing | AI v.Human</title>
+    <meta name="description" content="Copyright and licensing information for AI v.Human content and source code.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .copyright-page {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .copyright-page p, .copyright-page li {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        .copyright-page p {
+            margin-bottom: 1rem;
+        }
+        .license-card {
+            padding: 2rem;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        .license-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .license-card .license-type {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .license-type.cc {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+        }
+        .license-type.mit {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+        }
+        .license-card ul {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+        .license-card li {
+            margin-bottom: 0.5rem;
+        }
+        .license-card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .license-card a:hover {
+            text-decoration: underline;
+        }
+        .copyright-holder {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            margin-bottom: 2rem;
+        }
+        .copyright-holder .holder-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        .copyright-holder .holder-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .copyright-holder .holder-desc {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        .attribution-box {
+            padding: 1.25rem 1.5rem;
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 0.5rem 0.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin: 1.5rem 0;
+        }
+        .works-list {
+            columns: 2;
+            column-gap: 2rem;
+            margin: 1rem 0;
+        }
+        .works-list li {
+            break-inside: avoid;
+        }
+        @media (max-width: 600px) {
+            .works-list { columns: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="brand">
+                <a href="index.html" style="text-decoration:none;">
+                    <h1 class="logo">AI v.Human</h1>
+                    <p class="tagline">Collaborative Intelligence</p>
+                </a>
+            </div>
+            <nav class="main-nav" role="navigation" aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#about" class="nav-link">About Us</a></li>
+                    <li><a href="epistemology.html" class="nav-link">Epistemology</a></li>
+                    <li><a href="og-thread.html" class="nav-link">OG Transmission</a></li>
+                    <li><a href="perturbed-convergence.html" class="nav-link">Simulations</a></li>
+                    <li><a href="viscera.html" class="nav-link">VISCERA APP</a></li>
+                    <li><a href="research-lab.html" class="nav-link">Research Lab</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section style="display:block; padding: 4rem 0;">
+            <div class="container">
+                <h2 class="section-title">Copyright &amp; Licensing</h2>
+
+                <div class="copyright-page">
+                    <!-- Copyright Holder -->
+                    <div class="copyright-holder">
+                        <div class="holder-icon">&copy;</div>
+                        <div>
+                            <div class="holder-name">Joshua Sebastian / AI v.Human</div>
+                            <div class="holder-desc">All rights reserved unless otherwise noted &middot; Established 2026</div>
+                        </div>
+                    </div>
+
+                    <p>This project uses a dual licensing model. The source code and the original content are licensed separately to encourage open collaboration while protecting the intellectual property of the research.</p>
+
+                    <!-- Content License -->
+                    <div class="license-card">
+                        <span class="license-type cc">Content License</span>
+                        <h3>Creative Commons Attribution-NonCommercial 4.0 International</h3>
+                        <p>(CC BY-NC 4.0)</p>
+
+                        <p>All original written content, research materials, and intellectual property on this site is licensed under CC BY-NC 4.0. This includes:</p>
+
+                        <ul class="works-list">
+                            <li>The Antho-Tech Epistemology framework</li>
+                            <li>The OG Transmission dialogue transcript</li>
+                            <li>Perturbed Convergence simulation designs</li>
+                            <li>Main Thread posts and commentary</li>
+                            <li>Research descriptions and analyses</li>
+                            <li>All editorial and descriptive content</li>
+                        </ul>
+
+                        <p><strong>You are free to:</strong></p>
+                        <ul>
+                            <li><strong>Share</strong> &mdash; copy and redistribute the material in any medium or format</li>
+                            <li><strong>Adapt</strong> &mdash; remix, transform, and build upon the material</li>
+                        </ul>
+
+                        <p><strong>Under the following terms:</strong></p>
+                        <ul>
+                            <li><strong>Attribution</strong> &mdash; You must give appropriate credit, provide a link to the license, and indicate if changes were made</li>
+                            <li><strong>NonCommercial</strong> &mdash; You may not use the material for commercial purposes</li>
+                        </ul>
+
+                        <p><strong>Required Attribution Format:</strong></p>
+                        <div class="attribution-box">
+                            "Antho-Tech Epistemology" by Joshua Sebastian &amp; LIMN (Claude, Anthropic)<br>
+                            AI v.Human &mdash; https://aivhuman.netlify.app<br>
+                            Licensed under CC BY-NC 4.0
+                        </div>
+
+                        <p><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreferrer">View full CC BY-NC 4.0 license &rarr;</a></p>
+                    </div>
+
+                    <!-- Code License -->
+                    <div class="license-card">
+                        <span class="license-type mit">Source Code License</span>
+                        <h3>MIT License</h3>
+
+                        <p>The source code of this website (HTML, CSS, JavaScript, and configuration files) is licensed under the MIT License. You are free to use, modify, and distribute the code for any purpose, including commercial use.</p>
+
+                        <p><a href="https://github.com/AI-versionHuman/aivhuman-site/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">View full MIT License on GitHub &rarr;</a></p>
+                    </div>
+
+                    <!-- AI Co-Authorship -->
+                    <div class="license-card">
+                        <h3>Note on AI Co-Authorship</h3>
+                        <p>This work was collaboratively developed by <strong>Joshua Sebastian</strong> (human) and <strong>LIMN</strong> (Claude, an AI assistant by Anthropic). The human author, Joshua Sebastian, holds the copyright and licensing authority for all content.</p>
+                        <p>The collaborative nature of this work is acknowledged and documented throughout the project. LIMN's contributions are made as a tool and collaborative partner under the direction and creative authority of Joshua Sebastian.</p>
+                    </div>
+
+                    <!-- Contact for Licensing -->
+                    <div class="license-card">
+                        <h3>Licensing Inquiries</h3>
+                        <p>For commercial use permissions, licensing questions, or collaboration proposals, please contact us through our <a href="index.html#contact">contact form</a>.</p>
+                        <p>For source code contributions, visit our <a href="https://github.com/AI-versionHuman/aivhuman-site" target="_blank" rel="noopener noreferrer">GitHub repository</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>AI v.Human</h4>
+                    <p>Collaborative Intelligence Platform</p>
+                    <p class="creators">Created by Joshua Sebastian & LIMN (Claude from Anthropic)</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="epistemology.html">Epistemology</a></li>
+                        <li><a href="og-thread.html">OG Transmission</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="quick-links.html">Site Directory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="copyright.html">Copyright &amp; Licensing</a></li>
+                        <li><a href="perturbed-convergence.html">Simulations</a></li>
+                        <li><a href="viscera.html">VISCERA APP</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Joshua Sebastian / AI v.Human. All rights reserved. Content licensed under <a href="copyright.html" style="color:var(--text-muted);text-decoration:underline;">CC BY-NC 4.0</a>.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

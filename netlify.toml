@@ -1,7 +1,6 @@
 [build]
   command = "echo 'Static site - no build needed'"
   publish = "deploy"
-  ignore = "exit 0"
 
 [[redirects]]
   from = "/admin/*"
@@ -11,6 +10,6 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "DENY"
+    X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"

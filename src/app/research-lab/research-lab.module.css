@@ -1,0 +1,348 @@
+/* Research Lab — scoped styles preserving original design */
+
+.wrapper {
+  --rl-bg-primary: #0a0a0c;
+  --rl-bg-secondary: #111114;
+  --rl-bg-card: #16161a;
+  --rl-bg-elevated: #1c1c22;
+  --rl-text-primary: #e8e6e3;
+  --rl-text-secondary: #9a9590;
+  --rl-text-muted: #5a5550;
+  --rl-accent-red: #c43e3e;
+  --rl-accent-red-dim: #8a2c2c;
+  --rl-accent-green: #3a8a5c;
+  --rl-accent-blue: #4a7ab5;
+  --rl-accent-gold: #b89a5a;
+  --rl-border: #2a2a30;
+  --rl-border-light: #333338;
+
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.7;
+  color: var(--rl-text-primary);
+  background: var(--rl-bg-primary);
+  min-height: 100vh;
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  padding: 6rem 3rem 5rem;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse 800px 400px at 20% 50%, rgba(196, 62, 62, 0.06), transparent),
+    radial-gradient(ellipse 600px 300px at 80% 30%, rgba(74, 122, 181, 0.04), transparent);
+  pointer-events: none;
+}
+.heroLabel {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--rl-accent-red);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: rlFadeUp 0.8s ease forwards 0.2s;
+}
+.heroTitle {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+  max-width: 800px;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: rlFadeUp 0.8s ease forwards 0.4s;
+}
+.heroTitleEm {
+  font-style: italic;
+  color: var(--rl-accent-red);
+}
+.heroSub {
+  font-size: 1.05rem;
+  color: var(--rl-text-secondary);
+  max-width: 600px;
+  line-height: 1.8;
+  opacity: 0;
+  animation: rlFadeUp 0.8s ease forwards 0.6s;
+}
+
+/* ===== PAPER CARD ===== */
+.papersSection {
+  padding: 2rem 3rem 6rem;
+}
+.sectionLabel {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rl-text-muted);
+  margin-bottom: 2rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rl-border);
+}
+
+.paperCard {
+  background: var(--rl-bg-card);
+  border: 1px solid var(--rl-border);
+  border-radius: 2px;
+  padding: 3rem;
+  margin-bottom: 2rem;
+  position: relative;
+  transition: border-color 0.4s;
+  opacity: 0;
+  animation: rlFadeUp 0.8s ease forwards 0.8s;
+}
+.paperCard:hover {
+  border-color: var(--rl-border-light);
+}
+.paperCard::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: linear-gradient(180deg, var(--rl-accent-red), var(--rl-accent-red-dim), transparent);
+  border-radius: 2px 0 0 2px;
+}
+
+.paperStatus {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--rl-accent-gold);
+  background: rgba(184, 154, 90, 0.1);
+  border: 1px solid rgba(184, 154, 90, 0.2);
+  padding: 0.3rem 0.8rem;
+  border-radius: 2px;
+  margin-bottom: 1.2rem;
+}
+
+.paperTitle {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+.paperSubtitle {
+  font-size: 0.95rem;
+  color: var(--rl-text-secondary);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.paperMeta {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--rl-border);
+}
+.metaItem {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--rl-text-muted);
+  letter-spacing: 0.05em;
+}
+.metaItem strong {
+  color: var(--rl-text-secondary);
+  font-weight: 500;
+}
+
+.paperAbstract {
+  font-size: 0.95rem;
+  color: var(--rl-text-secondary);
+  line-height: 1.85;
+  margin-bottom: 2rem;
+  max-width: 720px;
+}
+
+.paperEquations {
+  background: var(--rl-bg-secondary);
+  border: 1px solid var(--rl-border);
+  border-radius: 2px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+}
+.paperEquationsTitle {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--rl-text-muted);
+  margin-bottom: 1rem;
+}
+.eqGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.8rem;
+}
+.eqItem {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--rl-text-secondary);
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--rl-border);
+}
+.eqItem span {
+  color: var(--rl-accent-red);
+  font-weight: 500;
+}
+
+.paperActions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rl-text-primary);
+  background: var(--rl-accent-red);
+  border: none;
+  padding: 0.85rem 1.8rem;
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.btnPrimary:hover {
+  background: #d44a4a;
+  transform: translateY(-1px);
+}
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rl-text-secondary);
+  background: transparent;
+  border: 1px solid var(--rl-border);
+  padding: 0.85rem 1.8rem;
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.btnSecondary:hover {
+  border-color: var(--rl-text-muted);
+  color: var(--rl-text-primary);
+}
+
+/* ===== KEY FINDINGS GRID ===== */
+.findings {
+  padding: 0 3rem 6rem;
+}
+.findingsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.findingCard {
+  background: var(--rl-bg-card);
+  border: 1px solid var(--rl-border);
+  border-radius: 2px;
+  padding: 2rem;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.findingCard:hover {
+  border-color: var(--rl-border-light);
+  transform: translateY(-2px);
+}
+.findingNumber {
+  font-family: 'Instrument Serif', serif;
+  font-size: 2.5rem;
+  color: var(--rl-accent-red-dim);
+  line-height: 1;
+  margin-bottom: 0.8rem;
+}
+.findingCard h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+  color: var(--rl-text-primary);
+}
+.findingCard p {
+  font-size: 0.88rem;
+  color: var(--rl-text-secondary);
+  line-height: 1.7;
+}
+
+/* ===== COLLAB NOTE ===== */
+.collabNote {
+  margin: 0 3rem 5rem;
+  padding: 2.5rem 3rem;
+  background: var(--rl-bg-secondary);
+  border-left: 3px solid var(--rl-accent-green);
+  border-radius: 0 2px 2px 0;
+}
+.collabNoteTitle {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rl-accent-green);
+  margin-bottom: 1rem;
+}
+.collabNote p {
+  font-size: 0.92rem;
+  color: var(--rl-text-secondary);
+  line-height: 1.8;
+  max-width: 680px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  padding: 3rem;
+  border-top: 1px solid var(--rl-border);
+  text-align: center;
+}
+.footer p {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--rl-text-muted);
+  letter-spacing: 0.1em;
+}
+.footer a {
+  color: var(--rl-text-muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer a:hover {
+  color: var(--rl-text-secondary);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes rlFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hero { padding: 4rem 1.5rem 3rem; }
+  .papersSection,
+  .findings { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .paperCard { padding: 2rem; }
+  .paperMeta { flex-direction: column; gap: 0.8rem; }
+  .collabNote { margin: 0 1.5rem 4rem; padding: 2rem; }
+  .eqGrid { grid-template-columns: 1fr; }
+  .findingsGrid { grid-template-columns: 1fr; }
+}

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { Navigation } from "@/components/Navigation";
-import { Footer } from "@/components/Footer";
+import { LeftSidebar } from "@/components/LeftSidebar";
+import { RightSidebar } from "@/components/RightSidebar";
 import { ReadingProgress } from "@/components/ReadingProgress";
 import "./globals.css";
 
@@ -42,11 +42,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className="antialiased min-h-screen flex flex-col">
+      <body className="antialiased min-h-screen bg-ink text-text-primary">
         <ReadingProgress />
-        <Navigation />
-        <main className="flex-1 pt-16">{children}</main>
-        <Footer />
+
+        {/* Fixed left sidebar */}
+        <LeftSidebar />
+
+        {/* Fixed right sidebar */}
+        <RightSidebar />
+
+        {/* Scrollable center content */}
+        <main className="ml-56 mr-56 min-h-screen">
+          {children}
+        </main>
       </body>
     </html>
   );

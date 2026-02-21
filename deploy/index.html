@@ -46,11 +46,13 @@
                 <ul>
                     <li><a href="#home" class="nav-link active">Home</a></li>
                     <li><a href="#about" class="nav-link">About Us</a></li>
-                    <li><a class='nav-link' href='/epistemology'>Epistemology</a></li>
-                    <li><a class='nav-link' href='/og-thread'>OG Transmission</a></li>
-                    <li><a class='nav-link' href='/viscera'>VISCERA APP</a></li>
-                    <li><a class='nav-link' href='/limn_design'>LIMN Design</a></li>
-                    <li><a class='nav-link' href='/meshlink'>MeshLink</a></li>
+                    <li><a href="epistemology.html" class="nav-link">Epistemology</a></li>
+                    <li><a href="og-thread.html" class="nav-link">OG Transmission</a></li>
+                    <li><a href="perturbed-convergence.html" class="nav-link">Simulations</a></li>
+                    <li><a href="viscera.html" class="nav-link">VISCERA APP</a></li>
+                    <li><a href="framework-paper.html" class="nav-link">Framework Paper</a></li>
+                    <li><a href="research-lab.html" class="nav-link">Research Lab</a></li>
+                    <li><a href="meshlink.html" class="nav-link">MeshLink</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
             </nav>
@@ -102,6 +104,33 @@
                             <p>No community threads yet. Be the first to start a conversation!</p>
                         </div>
                     </div>
+                </div>
+
+                <!-- Early Access -->
+                <div class="early-access-card" style="margin-top: 2.5rem;">
+                    <h3 class="section-title" style="font-size:1.5rem;">What Is Your Body Detecting?</h3>
+                    <p class="early-access-desc">VISCERA turns involuntary physiological responses into evidence-grade data. Join the early access list for beta testing and research updates.</p>
+                    <form name="early-access" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="early-access-form" id="earlyAccessFormHome">
+                        <p style="display:none;"><label>Don't fill this out: <input name="bot-field" /></label></p>
+                        <input type="hidden" name="form-name" value="early-access" />
+                        <div class="form-row">
+                            <div class="form-group" style="flex:2;">
+                                <input type="email" name="email" placeholder="your@email.com" required>
+                            </div>
+                            <div class="form-group" style="flex:1;">
+                                <select name="interest">
+                                    <option value="" disabled selected>I'm interested in...</option>
+                                    <option value="beta-tester">Beta testing VISCERA</option>
+                                    <option value="researcher">Research collaboration</option>
+                                    <option value="framework">Epistemology framework</option>
+                                    <option value="community">Community discussion</option>
+                                    <option value="all">Everything</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Get Early Access</button>
+                        <p class="early-access-fine">No spam. Data belongs to you — always.</p>
+                    </form>
                 </div>
             </div>
         </section>
@@ -222,19 +251,21 @@
                         <li><a href='/viscera'>VISCERA APP</a></li>
                         <li><a href='/limn_design'>LIMN Design</a></li>
                         <li><a href="#contact">Contact</a></li>
+                        <li><a href="quick-links.html">Site Directory</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Resources</h4>
                     <ul>
                         <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                        <li><a href="accessibility.html">Accessibility</a></li>
-                        <li><a href="#" id="adminLinkFooter">Admin Access</a></li>
+                        <li><a href="copyright.html">Copyright &amp; Licensing</a></li>
+                        <li><a href="perturbed-convergence.html">Simulations</a></li>
+                        <li><a href="viscera.html">VISCERA APP</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 AI v.Human. All rights reserved.</p>
+                <p>&copy; 2026 Joshua Sebastian / AI v.Human. All rights reserved. Content licensed under <a href="copyright.html" style="color:var(--text-muted);text-decoration:underline;">CC BY-NC 4.0</a>.</p>
             </div>
         </div>
     </footer>
